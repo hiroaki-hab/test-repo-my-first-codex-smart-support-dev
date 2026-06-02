@@ -36,6 +36,11 @@ const CFG = {
   // 関連各社様用シートへの同期先
   targetSsId: '1lRO9b2pIXuSlvvEv65gAhDpPxz1gkhsbU0f0peSgfGA',
   targetSheetName: '関連各社様閲覧用',
+
+  // 更新通知メール
+  notifyListSheetName: '通知先', // A列=メールアドレス（B列=会社/担当名は任意・自由記入）
+  notifySubject: '【光和工業】現場工程表 更新のお知らせ',
+  viewerUrl: 'https://docs.google.com/spreadsheets/d/1lRO9b2pIXuSlvvEv65gAhDpPxz1gkhsbU0f0peSgfGA/edit',
 };
 
 /*** ===== 共通ヘルパー ===== ***/
@@ -243,6 +248,56 @@ function syncGanttChartWithCopyTo() {
   targetSs.deleteSheet(temp);
 }
 
+/*** ===== ⑧ 関係各社へ「更新しました」通知メール（ボタン操作） ===== ***/
+function notifyUpdate() {
+  const ui = SpreadsheetApp.getUi();
+  const recipients = getNotifyRecipients_();
+  if (recipients.length === 0) {
+    ui.alert('「' + CFG.notifyListSheetName + '」シートのA列にメールアドレスを入れてください。');
+    return;
+  }
+
+  const res = ui.alert(
+    '更新通知の送信',
+    recipients.length + ' 件の宛先に「工程表を更新しました。ご確認ください」メールを送ります。よろしいですか？',
+    ui.ButtonSet.OK_CANCEL
+  );
+  if (res !== ui.Button.OK) return;
+
+  const today = Utilities.formatDate(new Date(), 'Asia/Tokyo', 'yyyy年M月d日');
+  const subject = CFG.notifySubject;
+  const body =
+    'お世話になっております。光和工業です。\n\n' +
+    '現場工程表を更新しました（' + today + '）。\n' +
+    'お手数ですが、下記よりご確認をお願いいたします。\n\n' +
+    CFG.viewerUrl + '\n\n' +
+    '※本メールはシステムからの自動送信です。';
+
+  // 各社のアドレスが互いに見えないよう1通ずつ送信
+  let sent = 0;
+  recipients.forEach(addr => {
+    try { MailApp.sendEmail(addr, subject, body); sent++; }
+    catch (err) { /* 1件失敗しても他は続行 */ }
+  });
+  ui.alert('送信しました（' + sent + ' / ' + recipients.length + ' 件）。');
+}
+
+// 同期してから通知（ワンタップ運用）
+function syncAndNotify() {
+  syncGanttChartWithCopyTo();
+  notifyUpdate();
+}
+
+// 「通知先」シートのA列からメールアドレスを取得（ヘッダー行や空欄は自動除外）
+function getNotifyRecipients_() {
+  const sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(CFG.notifyListSheetName);
+  if (!sh || sh.getLastRow() < 1) return [];
+  return sh.getRange(1, 1, sh.getLastRow(), 1).getValues()
+    .flat()
+    .map(v => (v || '').toString().trim())
+    .filter(v => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v));
+}
+
 /*** ===== スマホ用：先頭列＆日付を固定表示（最初に1回実行） ===== ***/
 function setupMobileView() {
   const sheet = getMainSheet_();
@@ -280,6 +335,9 @@ function onOpen() {
     .addSeparator()
     .addItem('全体を整える（色・リンク・赤線）', 'refreshAllCustomFormats')
     .addItem('今日の赤線だけ更新', 'drawTodayRedLine_')
+    .addSeparator()
+    .addItem('📧 関係各社へ更新通知メール', 'notifyUpdate')
+    .addItem('🔄 同期して通知（おすすめ）', 'syncAndNotify')
     .addSeparator()
     .addItem('📱 スマホ用の固定表示を設定', 'setupMobileView')
     .addItem('関連各社様用シートへ同期', 'syncGanttChartWithCopyTo')
