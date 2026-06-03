@@ -41,7 +41,7 @@
 |---|---|---|
 | **CHILLNN** | 公式予約サイト（自社予約の主力） | `https://admin.chillnn.com/19c7a1b53493d2` |
 | **Salon Board / HotPepper Beauty** | HPB経由の予約 | `https://salonboard.com/KLP/top/` |
-| **トリドリマーケティング** | インフルエンサー起用案件 | ⚠️管理画面URL不明（要確認） |
+| **トリドリマーケティング** | インフルエンサー起用案件 | `https://marketing.toridori.me/home` |
 | **電話・直接予約** | 直接の問い合わせ | — |
 
 **鉄則：1チャネルで予約が入ったら、他チャネルの同時間帯を必ず売止する（クロスロック）。**

@@ -6,7 +6,7 @@
 
 ## ✅ 確認済み（社長ヒアリング 2026-06-03）
 
-- **運用SNSは Instagram 中心**（`@kouwa.reform.sauna`）。X / TikTok / YouTube / LINE公式は現状メインでは使っていない。
+- **運用SNSは Instagram 中心**（`@kouwa.reform.sauna` = `https://www.instagram.com/kouwa.reform.sauna/`）。X / TikTok / YouTube / LINE公式は現状メインでは使っていない。
 - **文体・トーン＝親しみ・フレンドリー（絵文字OK）**。堅すぎず、距離が近い接客文。返信・投稿とも同トーン。
 - **投稿頻度＝週に数回**（毎日ではない）。
 - **リピート施策は現状なし → これから作りたい**（AIで仕組み化する有力候補）。
