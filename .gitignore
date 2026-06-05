@@ -6,3 +6,8 @@ state.json
 *.pem
 .env
 .env.*
+
+# Webhook URL等の秘密エンドポイント（現場支配シートZ連携・ローカル管理）
+webhook_url.local.txt
+*.webhook
+*.secret.*
