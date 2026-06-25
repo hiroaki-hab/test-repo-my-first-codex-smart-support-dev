@@ -855,7 +855,150 @@ function buildSlides() {
     slides.push({ bg: C.cream, els });
   }
 
-  // --- 12. ビジョン（将来像） ---
+  // --- 12. 数字の根拠（ざっくり） ---
+  {
+    const els = frame("数字の根拠（ざっくり）", "投資にまわせるお金は、どこから来るか。", 12);
+    // 行1：当座の余裕 ＝ 手元資金 − 近く払うお金
+    els.push({
+      type: "text",
+      x: 1.0,
+      y: 2.1,
+      w: 3.25,
+      h: 1.15,
+      fill: C.slate,
+      radius: 0.1,
+      align: "center",
+      valign: "middle",
+      lineSpacingMultiple: 1.0,
+      runs: [
+        { text: "手元資金（現預金）", size: 11, bold: true, color: "D8DDE0", break: true },
+        { text: "約7,800万円", size: 20, bold: true, color: C.white },
+      ],
+    });
+    els.push({
+      type: "text",
+      x: 4.3,
+      y: 2.1,
+      w: 0.55,
+      h: 1.15,
+      align: "center",
+      valign: "middle",
+      runs: [{ text: "−", size: 26, bold: true, color: C.slate }],
+    });
+    els.push({
+      type: "text",
+      x: 4.9,
+      y: 2.1,
+      w: 3.25,
+      h: 1.15,
+      fill: C.laundry,
+      radius: 0.1,
+      align: "center",
+      valign: "middle",
+      lineSpacingMultiple: 1.0,
+      runs: [
+        { text: "近く払うお金", size: 11, bold: true, color: "FBEAD9", break: true },
+        { text: "約4,080万円", size: 20, bold: true, color: C.white, break: true },
+        { text: "買掛・未払・短期借入 など", size: 8.5, color: "FBEAD9" },
+      ],
+    });
+    els.push({
+      type: "text",
+      x: 8.2,
+      y: 2.1,
+      w: 0.55,
+      h: 1.15,
+      align: "center",
+      valign: "middle",
+      runs: [{ text: "＝", size: 24, bold: true, color: C.green }],
+    });
+    els.push({
+      type: "text",
+      x: 8.8,
+      y: 2.1,
+      w: 3.5,
+      h: 1.15,
+      fill: C.green,
+      radius: 0.1,
+      align: "center",
+      valign: "middle",
+      lineSpacingMultiple: 1.0,
+      runs: [
+        { text: "当座の余裕", size: 11, bold: true, color: "CFE3CF", break: true },
+        { text: "約3,700万円", size: 22, bold: true, color: C.white },
+      ],
+    });
+    // 行2：毎年生まれる投資余力
+    els.push({
+      type: "text",
+      x: 1.0,
+      y: 3.55,
+      w: 11.3,
+      h: 1.15,
+      fill: C.white,
+      line: { color: C.sekisui, width: 2 },
+      radius: 0.1,
+      align: "center",
+      valign: "middle",
+      lineSpacingMultiple: 1.0,
+      runs: [
+        { text: "毎年あらたに生まれる投資余力　", size: 14, bold: true, color: C.slate },
+        { text: "約3,000万円／年", size: 22, bold: true, color: C.sekisui, break: true },
+        { text: "本業の利益 約700万 ＋ 減価償却 約2,460万（毎年つくり出せるお金）", size: 11, color: C.gray },
+      ],
+    });
+    // 行3：予備と入金待ち
+    els.push({
+      type: "text",
+      x: 1.0,
+      y: 5.0,
+      w: 5.55,
+      h: 1.15,
+      fill: C.white,
+      line: { color: "E0E0DA", width: 1 },
+      radius: 0.1,
+      align: "center",
+      valign: "middle",
+      lineSpacingMultiple: 1.0,
+      runs: [
+        { text: "予備：保険積立金 約3,000万円", size: 13, bold: true, color: C.wellness, break: true },
+        { text: "解約・契約者貸付で、いざという時の原資に", size: 10, color: C.slate },
+      ],
+    });
+    els.push({
+      type: "text",
+      x: 6.75,
+      y: 5.0,
+      w: 5.55,
+      h: 1.15,
+      fill: C.white,
+      line: { color: "E0E0DA", width: 1 },
+      radius: 0.1,
+      align: "center",
+      valign: "middle",
+      lineSpacingMultiple: 1.0,
+      runs: [
+        { text: "売掛金 約4,400万円", size: 13, bold: true, color: C.food, break: true },
+        { text: "まだ未回収＝これから入ってくるお金", size: 10, color: C.slate },
+      ],
+    });
+    els.push({
+      type: "text",
+      x: 1.0,
+      y: 6.42,
+      w: 11.3,
+      h: 0.5,
+      align: "center",
+      valign: "middle",
+      lineSpacingMultiple: 1.0,
+      runs: [
+        { text: "※第26期決算（R6.7〜R7.6）からの概算。定期預金の担保の有無・預金の内訳は通帳／勘定科目内訳明細書で要確認。", size: 10, italic: true, color: C.gray },
+      ],
+    });
+    slides.push({ bg: C.cream, els });
+  }
+
+  // --- 13. ビジョン（将来像） ---
   {
     const els = [];
     els.push({ type: "rect", x: 0, y: 0, w: SLIDE_W, h: SLIDE_H, fill: C.green });
@@ -902,9 +1045,9 @@ function buildSlides() {
     slides.push({ bg: C.green, els });
   }
 
-  // --- 13. みんなへ ---
+  // --- 14. みんなへ ---
   {
-    const els = frame("みんなへ", "変わるのは「数」じゃない。社会との“つながり”が広がること。", 13);
+    const els = frame("みんなへ", "変わるのは「数」じゃない。社会との“つながり”が広がること。", 14);
     els.push(
       ...bullets(1.0, 2.25, 11.0, [
         { head: "土台は、これまでと同じ。", sub: "技術と、誠実さと、人。約30年で積み上げたものは、これからも私たちの中心です。" },
