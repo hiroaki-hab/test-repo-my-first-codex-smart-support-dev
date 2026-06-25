@@ -1,0 +1,23 @@
+{
+  "name": "test-repo-my-first-codex-smart-support-dev",
+  "version": "1.0.0",
+  "description": "有限会社 光和工業 組織図 PowerPoint 生成スクリプト",
+  "main": "generate_org_chart.js",
+  "scripts": {
+    "generate": "node generate_org_chart.js",
+    "preview": "node preview.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://local_proxy@127.0.0.1:41729/git/hiroaki-hab/test-repo-my-first-codex-smart-support-dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "pptxgenjs": "^4.0.1"
+  },
+  "devDependencies": {
+    "playwright": "^1.61.1"
+  }
+}
