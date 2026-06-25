@@ -1,18 +1,19 @@
 // 社員向けビジョン資料「光和工業は、こう変わる。」レイアウト定義
 // 全スライドをプリミティブ(rect/text/line)の配列として定義する。
 // 配色は組織図(layout.js)と共通の Forest & Moss 系。
-const { C } = require("./layout");
+// 組織図スライドは layout.js の buildElements を再利用する。
+const { C, buildElements: buildOrgElements } = require("./layout");
 
 const SLIDE_W = 13.333;
 const SLIDE_H = 7.5;
 
 // ===== 共通パーツ =====
-// 各スライド共通の枠（背景・左アクセントバー・キッカー・タイトル・ページ番号）
-function frame(kicker, title, pageNo, opts = {}) {
+// 各スライド共通の枠（左アクセントバー・キッカー・タイトル・下線）
+// ページ番号は buildSlides 末尾でまとめて自動付与する。
+function frame(kicker, title, opts) {
+  if (typeof opts !== "object" || opts === null) opts = {};
   const els = [];
-  // 左上アクセントバー
   els.push({ type: "rect", x: 0.55, y: 0.62, w: 0.14, h: 0.78, fill: C.green, radius: 0.04 });
-  // キッカー（小見出し）
   els.push({
     type: "text",
     x: 0.85,
@@ -23,7 +24,6 @@ function frame(kicker, title, pageNo, opts = {}) {
     valign: "middle",
     runs: [{ text: kicker, size: 13, bold: true, color: C.laundry }],
   });
-  // タイトル
   els.push({
     type: "text",
     x: 0.82,
@@ -32,21 +32,9 @@ function frame(kicker, title, pageNo, opts = {}) {
     h: 0.7,
     align: "left",
     valign: "middle",
-    runs: [{ text: title, size: 27, bold: true, color: opts.titleColor || C.green }],
+    runs: [{ text: title, size: 25, bold: true, color: opts.titleColor || C.green }],
   });
-  // 下線
   els.push({ type: "line", x: 0.85, y: 1.72, w: 11.6, h: 0, color: "D8D8D2", width: 1.5 });
-  // ページ番号
-  els.push({
-    type: "text",
-    x: 12.2,
-    y: 6.98,
-    w: 0.9,
-    h: 0.34,
-    align: "right",
-    valign: "middle",
-    runs: [{ text: String(pageNo), size: 11, color: C.gray }],
-  });
   return els;
 }
 
@@ -72,6 +60,51 @@ function bullets(x, y, w, items, opts = {}) {
   }));
 }
 
+// 3カード横並び（タイトル帯＋本文）共通ヘルパ
+function threeCards(els, y, cards, opts = {}) {
+  const cw = opts.cw || 3.75;
+  const gap = opts.gap || 0.33;
+  const headH = opts.headH || 0.85;
+  const bodyH = opts.bodyH || 2.6;
+  const bodySize = opts.bodySize || 13.5;
+  let x = opts.x0 || 1.0;
+  cards.forEach((cd) => {
+    els.push({
+      type: "text",
+      x,
+      y,
+      w: cw,
+      h: headH,
+      fill: cd.c,
+      radius: 0.1,
+      align: "center",
+      valign: "middle",
+      lineSpacingMultiple: 0.98,
+      runs: cd.tag
+        ? [
+            { text: cd.t, size: 15, bold: true, color: C.white, break: true },
+            { text: cd.tag, size: 9, color: "F2F2F2" },
+          ]
+        : [{ text: cd.t, size: 15, bold: true, color: C.white }],
+    });
+    els.push({
+      type: "text",
+      x,
+      y: y + headH + 0.12,
+      w: cw,
+      h: bodyH,
+      fill: C.white,
+      line: { color: cd.border || "E0E0DA", width: 1 },
+      radius: 0.1,
+      align: "left",
+      valign: "top",
+      lineSpacingMultiple: 1.1,
+      runs: [{ text: cd.b, size: bodySize, color: C.slate }],
+    });
+    x += cw + gap;
+  });
+}
+
 // ===== スライド群 =====
 function buildSlides() {
   const slides = [];
@@ -79,7 +112,6 @@ function buildSlides() {
   // --- 1. 表紙 ---
   {
     const els = [];
-    // 背景の帯
     els.push({ type: "rect", x: 0, y: 0, w: SLIDE_W, h: 2.55, fill: C.green });
     els.push({ type: "rect", x: 0, y: 2.55, w: SLIDE_W, h: 0.12, fill: C.laundry });
     els.push({
@@ -116,7 +148,6 @@ function buildSlides() {
         { text: "“暮らしと健康”をつくる会社へ。", size: 26, bold: true, color: C.slate },
       ],
     });
-    // 5事業のミニチップ
     const chips = [
       { t: "積水ハウス不動産", c: C.sekisui },
       { t: "ランドリー moco", c: C.laundry },
@@ -150,16 +181,14 @@ function buildSlides() {
       h: 0.45,
       align: "left",
       valign: "middle",
-      runs: [
-        { text: "有限会社 光和工業（宮城県黒川郡大和町・1997年創業）", size: 12, color: C.gray },
-      ],
+      runs: [{ text: "有限会社 光和工業（宮城県黒川郡大和町・1997年創業）", size: 12, color: C.gray }],
     });
     slides.push({ bg: C.cream, els });
   }
 
   // --- 2. これまでの私たち ---
   {
-    const els = frame("これまでの私たち", "リフォーム屋として、約30年で積み上げてきたもの。", 2);
+    const els = frame("これまでの私たち", "リフォーム屋として、約30年で積み上げてきたもの。");
     els.push(
       ...bullets(1.0, 2.15, 7.0, [
         { head: "1997年、大和町で創業。", sub: "積水ハウス不動産の原状回復・リノベを支えるリフォーム屋として。" },
@@ -167,7 +196,6 @@ function buildSlides() {
         { head: "そして何より、信頼。", sub: "任せてもらえる関係を、一件ずつ積み重ねてきた。" },
       ])
     );
-    // 右側メッセージカード
     els.push({
       type: "text",
       x: 8.4,
@@ -201,14 +229,49 @@ function buildSlides() {
     slides.push({ bg: C.cream, els });
   }
 
-  // --- 3. なぜ、いま変わるのか ---
+  // --- 3. 会社の実績と体制 ---
   {
-    const els = frame("なぜ、いま変わるのか", "世の中が変わっている。だから私たちも動く。", 3);
-    const cards = [
+    const els = frame("会社の実績と体制", "取引先と、拠点と、現場の力。");
+    threeCards(els, 2.15, [
+      {
+        c: C.sekisui,
+        t: "主な取引先",
+        b: "・積水ハウス不動産（PM）\n・株式会社 山一地所\n・サステム\n・LIXILトータルサービス\n・自社アパートの賃貸運営",
+      },
+      {
+        c: C.laundry,
+        t: "拠点（すべて自社所有）",
+        b: "・本社：大和町 杜の丘1丁目\n・ランドリー：仙台市青葉区立町\n・アパート：仙台市青葉区立町\n\n地元・大和町に根を張りつつ、仙台にも拠点を持つ。",
+      },
+      {
+        c: C.green,
+        t: "現場の力（事業モデル）",
+        b: "売上の約6割を協力業者と分担する「施工管理型」。自社で工程管理ができる段取り力と、急な原状回復にも応える対応力が強み。",
+      },
+    ]);
+    els.push({
+      type: "text",
+      x: 1.0,
+      y: 5.65,
+      w: 11.3,
+      h: 0.7,
+      align: "center",
+      valign: "middle",
+      runs: [
+        { text: "創業以来の取引先との信頼が、そのまま新しい事業の“入口”になる。", size: 14, italic: true, color: C.slate },
+      ],
+    });
+    slides.push({ bg: C.cream, els });
+  }
+
+  // --- 4. なぜ、いま変わるのか ---
+  {
+    const els = frame("なぜ、いま変わるのか", "世の中が変わっている。だから私たちも動く。");
+    threeCards(els, 2.2, [
       {
         c: C.slate,
         t: "地方は、人口減と担い手不足",
-        b: "単一の下請けだけでは、会社の未来が「一社の事情」に左右されてしまう。事業の柱を増やすことは、みんなの雇用を守ること。",
+        b: "単一の下請けだけでは、会社の未来が「一社の事情」に左右されてしまう。積水からの発注も近年は減少傾向。事業の柱を増やすことは、みんなの雇用を守ること。",
       },
       {
         c: C.wellness,
@@ -220,51 +283,19 @@ function buildSlides() {
         t: "技術と人を、もっと広い世界へ",
         b: "「空間を直す力」と現場の人材は、住まいの外でも通用する。眠らせておくのはもったいない。",
       },
-    ];
-    const cw = 3.75;
-    let x = 1.0;
-    cards.forEach((cd) => {
-      els.push({
-        type: "text",
-        x,
-        y: 2.2,
-        w: cw,
-        h: 0.85,
-        fill: cd.c,
-        radius: 0.1,
-        align: "center",
-        valign: "middle",
-        lineSpacingMultiple: 1.0,
-        runs: [{ text: cd.t, size: 15, bold: true, color: C.white }],
-      });
-      els.push({
-        type: "text",
-        x,
-        y: 3.2,
-        w: cw,
-        h: 2.6,
-        fill: C.white,
-        line: { color: "E0E0DA", width: 1 },
-        radius: 0.1,
-        align: "left",
-        valign: "top",
-        lineSpacingMultiple: 1.1,
-        runs: [{ text: cd.b, size: 13.5, color: C.slate }],
-      });
-      x += cw + 0.33;
-    });
+    ]);
     slides.push({ bg: C.cream, els });
   }
 
-  // --- 4. 新しい私たちの姿（5事業） ---
+  // --- 5. 新しい私たちの姿（5事業） ---
   {
-    const els = frame("新しい私たちの姿", "5つの事業で、暮らしを多面的に支える。", 4);
+    const els = frame("新しい私たちの姿", "5つの事業で、暮らしを多面的に支える。");
     const biz = [
-      { c: C.sekisui, t: "積水ハウス不動産", s: "退去・原状回復・リノベ", d: "本業。すべての土台。" },
-      { c: C.laundry, t: "ランドリー moco", s: "コインランドリー＋穀物乾燥機組立", d: "地域の日常と産業を支える。" },
-      { c: C.sauna, t: "KÖWA SAUNA", s: "完全貸切プライベートサウナ", d: "リフォーム屋が本気で作る“ととのう”。" },
-      { c: C.wellness, t: "ウェルネス", s: "健康経営コンサル／保険・睡眠", d: "人の健康そのものを支える。" },
-      { c: C.food, t: "飲食（カフェ）", s: "アニマルフレンドリーカフェ", d: "地域が集う場と、社会貢献。" },
+      { c: C.sekisui, t: "積水ハウス不動産", s: "退去・原状回復・リノベ", d: "本業。積水・山一・LIXILの工事を受託。すべての土台。" },
+      { c: C.laundry, t: "ランドリー moco", s: "コインランドリー＋穀物乾燥機", d: "moco運営。AQUA/TOSEI代理店で機器販売も。" },
+      { c: C.sauna, t: "KÖWA SAUNA", s: "完全貸切プライベートサウナ", d: "kokolo製。月額2万・週2回の貸切サブスク。" },
+      { c: C.wellness, t: "ウェルネス", s: "健康経営／保険・睡眠", d: "BrainSleep代理店。健康経営支援から保険まで。" },
+      { c: C.food, t: "飲食（カフェ）", s: "アニマルフレンドリーカフェ", d: "売上の一部を動物保護へ。杜の丘で出店予定。" },
     ];
     const cw = 2.25;
     let x = 0.78;
@@ -290,23 +321,23 @@ function buildSlides() {
         x,
         y: 3.35,
         w: cw,
-        h: 1.5,
+        h: 1.7,
         fill: C.white,
         line: { color: b.c, width: 1 },
         radius: 0.1,
         align: "left",
         valign: "top",
         lineSpacingMultiple: 1.08,
-        runs: [{ text: b.d, size: 12, color: C.slate }],
+        runs: [{ text: b.d, size: 11.5, color: C.slate }],
       });
       x += cw + 0.2;
     });
     els.push({
       type: "text",
       x: 1.0,
-      y: 5.55,
+      y: 5.7,
       w: 11.3,
-      h: 0.9,
+      h: 0.8,
       align: "center",
       valign: "middle",
       runs: [
@@ -317,9 +348,14 @@ function buildSlides() {
     slides.push({ bg: C.cream, els });
   }
 
-  // --- 5. ひとつの糸でつながる（連鎖図） ---
+  // --- 6. 組織図（layout.js を再利用） ---
   {
-    const els = frame("5つは、ひとつの糸でつながる", "直す → 整える → 憩う → 健康に → 集う", 5);
+    slides.push({ bg: C.cream, els: buildOrgElements(), noPage: true });
+  }
+
+  // --- 7. ひとつの糸でつながる（連鎖図） ---
+  {
+    const els = frame("5つは、ひとつの糸でつながる", "直す → 整える → 憩う → 健康に → 集う");
     const chain = [
       { c: C.sekisui, step: "直す", who: "積水ハウス不動産", note: "空間を直す技術" },
       { c: C.laundry, step: "整える", who: "ランドリー／乾燥機", note: "日常と産業を支える" },
@@ -350,7 +386,6 @@ function buildSlides() {
         ],
       });
       if (i < chain.length - 1) {
-        // 矢印（>）
         els.push({
           type: "text",
           x: x + cw - 0.02,
@@ -364,7 +399,6 @@ function buildSlides() {
       }
       x += cw + gap;
     });
-    // 縦糸・横糸の説明
     els.push({
       type: "text",
       x: 1.0,
@@ -400,9 +434,55 @@ function buildSlides() {
     slides.push({ bg: C.cream, els });
   }
 
-  // --- 6. 世の中とどうつながるか ---
+  // --- 8. 5事業はこう連携する（クロス連携の具体例） ---
   {
-    const els = frame("世の中と、どうつながるか", "私たちの仕事が、社会の課題とつながっていく。", 6);
+    const els = frame("5事業は、こう連携する", "事業どうしが、お客様と仕事を渡し合う。");
+    const links = [
+      { c: C.sekisui, pair: "積水 × サウナ", b: "賃貸オーナーに「サウナ付き物件」を提案。原状回復の延長で、付加価値リノベに。" },
+      { c: C.laundry, pair: "リフォーム × ランドリー", b: "アパート・店舗にコインランドリーや業務用機器（AQUA/TOSEI）を設備提案。" },
+      { c: C.sauna, pair: "サウナ × ウェルネス", b: "企業の福利厚生にサウナ利用。BrainSleepの睡眠×サウナで「ととのう＋眠る」。" },
+      { c: C.wellness, pair: "ウェルネス × サウナ／ランドリー", b: "健康経営・福利厚生の提案を入口に、サウナ・寝具・ランドリーも一緒に営業。" },
+      { c: C.food, pair: "サウナ × カフェ", b: "ととのった後の“サ飯”。杜の丘でサウナ＋カフェを一日の体験に。" },
+      { c: C.green, pair: "ランドリー × 乾燥機 × 農業", b: "穀物乾燥機の組立から農業設備へ。JA新みやぎの人脈を活かす。" },
+    ];
+    const cw = 5.6;
+    const gap = 0.18;
+    const ch = 1.32;
+    const vgap = 0.13;
+    links.forEach((l, i) => {
+      const col = i % 2;
+      const row = Math.floor(i / 2);
+      const x = 1.0 + col * (cw + gap);
+      const y = 2.05 + row * (ch + vgap);
+      els.push({ type: "rect", x, y, w: 0.12, h: ch, fill: l.c, radius: 0.03 });
+      els.push({
+        type: "text",
+        x: x + 0.26,
+        y: y + 0.04,
+        w: cw - 0.4,
+        h: 0.44,
+        align: "left",
+        valign: "middle",
+        runs: [{ text: l.pair, size: 14, bold: true, color: l.c }],
+      });
+      els.push({
+        type: "text",
+        x: x + 0.26,
+        y: y + 0.5,
+        w: cw - 0.4,
+        h: 0.78,
+        align: "left",
+        valign: "top",
+        lineSpacingMultiple: 1.05,
+        runs: [{ text: l.b, size: 12, color: C.slate }],
+      });
+    });
+    slides.push({ bg: C.cream, els });
+  }
+
+  // --- 9. 世の中とどうつながるか ---
+  {
+    const els = frame("世の中と、どうつながるか", "私たちの仕事が、社会の課題とつながっていく。");
     const items = [
       { c: C.wellness, t: "働く人の健康", b: "健康経営コンサル・BrainSleep の睡眠・保険相談で、企業と人の「元気」を支える。" },
       { c: C.laundry, t: "地域と産業", b: "コインランドリーは暮らしのインフラ。穀物乾燥機の組立（JA連携）で農業も支える。" },
@@ -445,64 +525,163 @@ function buildSlides() {
     slides.push({ bg: C.cream, els });
   }
 
-  // --- 7. これからの拠点・店舗像 ---
+  // --- 10. サウナ事業を深掘り ---
   {
-    const els = frame("これからの拠点・店舗", "地域に、“光和の顔”が増えていく。", 7);
-    const places = [
+    const els = frame("KÖWA SAUNA を深掘り", "リフォーム屋が本気で作る、完全貸切サウナ。", { titleColor: C.sauna });
+    threeCards(
+      els,
+      2.1,
+      [
+        {
+          c: C.sauna,
+          t: "商品",
+          b: "kokolo sauna 社製の PSE認証バレルサウナ＋水風呂＋冷却チラー。FSC認証の高品質な木材。住宅・敷地に合わせた柔軟設計。",
+        },
+        {
+          c: C.sauna,
+          t: "ビジネスのかたち",
+          b: "①月額2万円・週2回の貸切サブスク体験\n②「入ってから買える」体験型ショールーム\n③設備の販売・設置＋リフォーム一式",
+        },
+        {
+          c: C.sauna,
+          t: "ねらう顧客",
+          b: "自宅サウナを検討する30〜60代の健康志向・中高所得層。賃貸オーナー・工務店・設計事務所などBtoBも。",
+        },
+      ],
+      { bodyH: 2.35, bodySize: 12.5 }
+    );
+    els.push({
+      type: "text",
+      x: 1.0,
+      y: 4.95,
+      w: 11.3,
+      h: 0.85,
+      fill: C.slate,
+      radius: 0.1,
+      align: "center",
+      valign: "middle",
+      lineSpacingMultiple: 1.05,
+      runs: [
+        { text: "競合との違い　", size: 14, bold: true, color: C.white },
+        { text: "HARVIA・メトス・MySauna（98〜176万）に対し、唯一「体験してから買える屋外モデル展示」で勝負。", size: 12.5, color: "EDEDEF" },
+      ],
+    });
+    els.push({
+      type: "text",
+      x: 1.0,
+      y: 5.95,
+      w: 11.3,
+      h: 0.6,
+      align: "center",
+      valign: "middle",
+      runs: [
+        { text: "顧客の声：「自宅に整う空間が欲しい」「実物を見て買いたい」「別荘・宿泊にサウナを」「整体・エステに整い要素を」", size: 11.5, italic: true, color: C.sauna },
+      ],
+    });
+    slides.push({ bg: C.cream, els });
+  }
+
+  // --- 11. これから広がりそうな事業 ---
+  {
+    const els = frame("これから、広がりそうな事業", "5つの事業の“となり”には、次の種がある。");
+    const cols = [
       {
-        c: C.sauna,
-        t: "KÖWA SAUNA",
-        tag: "完全貸切プライベートサウナ",
-        b: "社長直轄。リフォームの技術で作り込んだ空間で、「ととのう」を独り占めできる場所に。",
-      },
-      {
-        c: C.food,
-        t: "杜の丘 カフェ",
-        tag: "POPUP → クラファン → 2年後に店舗",
-        b: "アニマルフレンドリーカフェ。まず試し、応援を集め、地域に根づく店へ育てていく。",
+        c: C.sekisui,
+        t: "住まい・不動産の“となり”",
+        items: ["サウナ付き賃貸／ウェルネス住宅（自社アパート活用）", "空き家活用・オーナー提案型リノベ"],
       },
       {
         c: C.wellness,
-        t: "ウェルネス拠点",
-        tag: "健康経営・保険・睡眠（8月〜）",
-        b: "休憩室や寝具の福利厚生提案を入口に、サウナ・寝具の営業ともつながっていく。",
+        t: "健康・くらしの“となり”",
+        items: ["健康経営まるごとパッケージ（サウナ＋睡眠＋食）", "BrainSleep寝具・健康グッズの物販／法人提案"],
+      },
+      {
+        c: C.laundry,
+        t: "ものづくり・地域の“となり”",
+        items: ["農業・産業設備の組立受託（穀物乾燥機の先へ）", "宿泊・グランピング・整体施設向けサウナ（BtoB）"],
       },
     ];
     const cw = 3.75;
     let x = 1.0;
-    places.forEach((p) => {
+    cols.forEach((col) => {
       els.push({
         type: "text",
         x,
         y: 2.15,
         w: cw,
-        h: 0.95,
-        fill: p.c,
+        h: 0.7,
+        fill: col.c,
         radius: 0.1,
         align: "center",
         valign: "middle",
-        lineSpacingMultiple: 0.98,
-        runs: [
-          { text: p.t, size: 16, bold: true, color: C.white, break: true },
-          { text: p.tag, size: 9, color: "F2F2F2" },
-        ],
+        runs: [{ text: col.t, size: 13.5, bold: true, color: C.white }],
       });
-      els.push({
-        type: "text",
-        x,
-        y: 3.25,
-        w: cw,
-        h: 2.4,
-        fill: C.white,
-        line: { color: "E0E0DA", width: 1 },
-        radius: 0.1,
-        align: "left",
-        valign: "top",
-        lineSpacingMultiple: 1.12,
-        runs: [{ text: p.b, size: 13.5, color: C.slate }],
+      let iy = 3.0;
+      col.items.forEach((it) => {
+        els.push({
+          type: "text",
+          x,
+          y: iy,
+          w: cw,
+          h: 1.25,
+          fill: C.white,
+          line: { color: col.c, width: 1 },
+          radius: 0.1,
+          align: "left",
+          valign: "middle",
+          lineSpacingMultiple: 1.08,
+          runs: [
+            { text: "● ", size: 11, bold: true, color: col.c },
+            { text: it, size: 12.5, color: C.slate },
+          ],
+        });
+        iy += 1.37;
       });
       x += cw + 0.33;
     });
+    els.push({
+      type: "text",
+      x: 1.0,
+      y: 6.15,
+      w: 11.3,
+      h: 0.6,
+      align: "center",
+      valign: "middle",
+      runs: [
+        { text: "どれも「いまの事業の延長線上」。無理な飛び地ではなく、地続きで広げていく。", size: 14, italic: true, color: C.slate },
+      ],
+    });
+    slides.push({ bg: C.cream, els });
+  }
+
+  // --- 12. これからの拠点・店舗像 ---
+  {
+    const els = frame("これからの拠点・店舗", "地域に、“光和の顔”が増えていく。");
+    threeCards(
+      els,
+      2.15,
+      [
+        {
+          c: C.sauna,
+          t: "KÖWA SAUNA",
+          tag: "完全貸切プライベートサウナ",
+          b: "社長直轄。リフォームの技術で作り込んだ空間で、「ととのう」を独り占めできる場所に。",
+        },
+        {
+          c: C.food,
+          t: "杜の丘 カフェ",
+          tag: "POPUP → クラファン → 2年後に店舗",
+          b: "アニマルフレンドリーカフェ。まず試し、応援を集め、地域に根づく店へ育てていく。",
+        },
+        {
+          c: C.wellness,
+          t: "ウェルネス拠点",
+          tag: "健康経営・保険・睡眠（8月〜）",
+          b: "休憩室や寝具の福利厚生提案を入口に、サウナ・寝具の営業ともつながっていく。",
+        },
+      ],
+      { bodyH: 2.4 }
+    );
     els.push({
       type: "text",
       x: 1.0,
@@ -516,40 +695,83 @@ function buildSlides() {
     slides.push({ bg: C.cream, els });
   }
 
-  // --- 8. 働き方が変わる ---
+  // --- 13. 一人ひとりの働き方 ---
   {
-    const els = frame("一人ひとりの、働き方", "ひとつの会社で、いくつもの経験と成長を。", 8);
-    // 油谷モデル
+    const els = frame("一人ひとりの、働き方", "ほとんどの人は、これまで通り。一部の人が、横断する。");
+    // 前置きバナー
     els.push({
       type: "text",
       x: 1.0,
-      y: 2.15,
+      y: 2.0,
       w: 11.3,
-      h: 0.95,
-      fill: C.slate,
+      h: 0.78,
+      fill: C.green,
       radius: 0.1,
-      align: "left",
+      align: "center",
       valign: "middle",
       lineSpacingMultiple: 1.0,
       runs: [
-        { text: "例：油谷さんの働き方　", size: 16, bold: true, color: C.white },
-        { text: "積水の定期巡回を軸に、サウナ・飲食・穀物乾燥機の組立まで横断サポート（JA新みやぎ18年・フォークリフト有）", size: 12, color: "EDEDEF" },
+        { text: "働き方は、大きくは変わりません。", size: 14, bold: true, color: C.white },
+        { text: "多くの人は本業のまま。そのうえで、一部の人が事業をまたいで活躍します。", size: 13, color: "E6F0E6" },
       ],
     });
+    // 人物カード2枚
+    const people = [
+      {
+        c: C.slate,
+        name: "油谷さん",
+        role: "積水・定期巡回の補佐 ＋ 雑務オールマイティ",
+        b: "猪股さんの下で定期巡回を支えつつ、雑務もオールマイティに。さらにサウナ・飲食・穀物乾燥機の組立まで横断サポート。（JA新みやぎ18年・フォークリフト有）",
+      },
+      {
+        c: C.wellness,
+        name: "小林さん（ウェルネス）",
+        role: "健康経営コンサル",
+        b: "健康経営支援や福利厚生提案など、さまざまな提案をしながら、その流れでサウナ・ランドリーの営業も担う。コンサルが“入口”になる。",
+      },
+    ];
+    let px = 1.0;
+    people.forEach((p) => {
+      els.push({ type: "rect", x: px, y: 3.05, w: 5.55, h: 1.95, fill: C.white, line: { color: p.c, width: 1.5 }, radius: 0.1 });
+      els.push({
+        type: "text",
+        x: px + 0.22,
+        y: 3.2,
+        w: 5.1,
+        h: 0.66,
+        align: "left",
+        valign: "middle",
+        lineSpacingMultiple: 0.98,
+        runs: [
+          { text: p.name, size: 15, bold: true, color: p.c, break: true },
+          { text: p.role, size: 10.5, bold: true, color: C.gray },
+        ],
+      });
+      els.push({
+        type: "text",
+        x: px + 0.22,
+        y: 3.92,
+        w: 5.1,
+        h: 0.98,
+        align: "left",
+        valign: "top",
+        lineSpacingMultiple: 1.08,
+        runs: [{ text: p.b, size: 12, color: C.slate }],
+      });
+      px += 5.55 + 0.2;
+    });
     els.push(
-      ...bullets(1.0, 3.45, 11.0, [
-        { head: "マルチスキルへ。", sub: "一つの現場に縛られず、複数の事業で力を発揮できる。スキルの掛け算がその人の価値になる。" },
-        { head: "兼務は、リスク分散でもある。", sub: "会社にとっては事業の柱が増えること。働く人にとっては、仕事が途切れにくくなること。" },
-        { head: "成長の機会が、社内に広がる。", sub: "やってみたいことに手を挙げられる。新しい事業は、新しい役割とポジションを生む。" },
-      ], { gap: 1.0, size: 16 })
+      ...bullets(1.0, 5.25, 11.3, [
+        { head: "マルチスキルは、価値の掛け算。", sub: "複数の事業で力を発揮できる人が、これからの光和を支える。" },
+        { head: "兼務は、リスク分散でもある。", sub: "仕事が途切れにくく、挑戦と成長の機会も広がる。やってみたいことは、ぜひ声に。" },
+      ], { gap: 0.78, size: 15 })
     );
     slides.push({ bg: C.cream, els });
   }
 
-  // --- 9. ロードマップ ---
+  // --- 14. ロードマップ ---
   {
-    const els = frame("ロードマップ", "5つの事業がそろうまで、そして、その先へ。", 9);
-    // タイムライン矢印
+    const els = frame("ロードマップ", "5つの事業がそろうまで、そして、その先へ。");
     els.push({ type: "line", x: 1.0, y: 2.22, w: 11.3, h: 0, color: C.green, width: 2.5, endArrow: true });
     const phases = [
       {
@@ -623,10 +845,9 @@ function buildSlides() {
     slides.push({ bg: C.cream, els });
   }
 
-  // --- 10. 数字で見る目標 ---
+  // --- 15. 数字で見る目標 ---
   {
-    const els = frame("数字で見る目標", "現在地は約4.65億円。目指すは、年商7億円。", 10);
-    // 現在地 → 目標 の比較バンド
+    const els = frame("数字で見る目標", "現在地は約4.65億円。目指すは、年商7億円。");
     els.push({
       type: "text",
       x: 1.0,
@@ -675,7 +896,6 @@ function buildSlides() {
         { text: "5事業の合計で", size: 9.5, color: "CFE3CF" },
       ],
     });
-    // 7億の内訳 積み上げバー（3 : 2 : 1 : 1）
     els.push({
       type: "text",
       x: 1.0,
@@ -714,7 +934,6 @@ function buildSlides() {
       });
       sx += w;
     });
-    // 凡例カード
     const legend = [
       { c: C.sekisui, name: "リフォーム本業", sub: "積水ハウス不動産 等", amt: "3億円", note: "会社の土台（実績あり）" },
       { c: C.laundry, name: "ランドリー事業", sub: "moco・穀物乾燥機", amt: "2億円", note: "現状 約1億 → 倍増へ" },
@@ -777,228 +996,7 @@ function buildSlides() {
     slides.push({ bg: C.cream, els });
   }
 
-  // --- 11. 投資と資源 ---
-  {
-    const els = frame("投資と資源", "7億への原資を、どう生み出すか。", 11);
-    const items = [
-      {
-        c: C.green,
-        t: "内部資金（自前のキャッシュ）",
-        b: "本業の利益と減価償却で、年あたり数千万円規模の投資余力。手元資金も約7,800万円。まず自分たちの稼ぎを元手にする。",
-      },
-      {
-        c: C.sekisui,
-        t: "自社の資産を活かす",
-        b: "本社・仙台のランドリー・アパートなど、自社で持つ土地建物（約8億円規模）を、新しい事業の「場」として転用する。",
-      },
-      {
-        c: C.laundry,
-        t: "外部資金の活用",
-        b: "新事業進出補助金（サウナ展示施設）などの補助金や借入を組み合わせ、大きな設備投資をまかなう。使える制度は使う。",
-      },
-      {
-        c: C.wellness,
-        t: "最大の資源は「人」",
-        b: "マルチスキル化（油谷モデル）で、限られた人数を横断活用。採用と育成にも投資し、一人ひとりの力を最大化する。",
-      },
-    ];
-    const cw = 5.6;
-    const ch = 1.6;
-    const positions = [
-      [1.0, 2.1],
-      [6.85, 2.1],
-      [1.0, 3.85],
-      [6.85, 3.85],
-    ];
-    items.forEach((it, i) => {
-      const [x, y] = positions[i];
-      els.push({ type: "rect", x, y, w: 0.12, h: ch, fill: it.c, radius: 0.03 });
-      els.push({
-        type: "text",
-        x: x + 0.28,
-        y: y - 0.02,
-        w: cw - 0.4,
-        h: 0.5,
-        align: "left",
-        valign: "middle",
-        runs: [{ text: it.t, size: 16, bold: true, color: it.c }],
-      });
-      els.push({
-        type: "text",
-        x: x + 0.28,
-        y: y + 0.5,
-        w: cw - 0.4,
-        h: 1.05,
-        align: "left",
-        valign: "top",
-        lineSpacingMultiple: 1.1,
-        runs: [{ text: it.b, size: 13, color: C.slate }],
-      });
-    });
-    // 進め方バナー
-    els.push({
-      type: "text",
-      x: 1.0,
-      y: 5.7,
-      w: 11.3,
-      h: 0.9,
-      fill: C.slate,
-      radius: 0.1,
-      align: "center",
-      valign: "middle",
-      lineSpacingMultiple: 1.05,
-      runs: [
-        { text: "進め方　", size: 15, bold: true, color: C.white },
-        { text: "本業のキャッシュを土台に、新規は小さく試して育てる（カフェは POPUP → クラファン → 店舗）。", size: 13, color: "EDEDEF" },
-      ],
-    });
-    slides.push({ bg: C.cream, els });
-  }
-
-  // --- 12. 数字の根拠（ざっくり） ---
-  {
-    const els = frame("数字の根拠（ざっくり）", "投資にまわせるお金は、どこから来るか。", 12);
-    // 行1：当座の余裕 ＝ 手元資金 − 近く払うお金
-    els.push({
-      type: "text",
-      x: 1.0,
-      y: 2.1,
-      w: 3.25,
-      h: 1.15,
-      fill: C.slate,
-      radius: 0.1,
-      align: "center",
-      valign: "middle",
-      lineSpacingMultiple: 1.0,
-      runs: [
-        { text: "手元資金（現預金）", size: 11, bold: true, color: "D8DDE0", break: true },
-        { text: "約7,800万円", size: 20, bold: true, color: C.white },
-      ],
-    });
-    els.push({
-      type: "text",
-      x: 4.3,
-      y: 2.1,
-      w: 0.55,
-      h: 1.15,
-      align: "center",
-      valign: "middle",
-      runs: [{ text: "−", size: 26, bold: true, color: C.slate }],
-    });
-    els.push({
-      type: "text",
-      x: 4.9,
-      y: 2.1,
-      w: 3.25,
-      h: 1.15,
-      fill: C.laundry,
-      radius: 0.1,
-      align: "center",
-      valign: "middle",
-      lineSpacingMultiple: 1.0,
-      runs: [
-        { text: "近く払うお金", size: 11, bold: true, color: "FBEAD9", break: true },
-        { text: "約4,080万円", size: 20, bold: true, color: C.white, break: true },
-        { text: "買掛・未払・短期借入 など", size: 8.5, color: "FBEAD9" },
-      ],
-    });
-    els.push({
-      type: "text",
-      x: 8.2,
-      y: 2.1,
-      w: 0.55,
-      h: 1.15,
-      align: "center",
-      valign: "middle",
-      runs: [{ text: "＝", size: 24, bold: true, color: C.green }],
-    });
-    els.push({
-      type: "text",
-      x: 8.8,
-      y: 2.1,
-      w: 3.5,
-      h: 1.15,
-      fill: C.green,
-      radius: 0.1,
-      align: "center",
-      valign: "middle",
-      lineSpacingMultiple: 1.0,
-      runs: [
-        { text: "当座の余裕", size: 11, bold: true, color: "CFE3CF", break: true },
-        { text: "約3,700万円", size: 22, bold: true, color: C.white },
-      ],
-    });
-    // 行2：毎年生まれる投資余力
-    els.push({
-      type: "text",
-      x: 1.0,
-      y: 3.55,
-      w: 11.3,
-      h: 1.15,
-      fill: C.white,
-      line: { color: C.sekisui, width: 2 },
-      radius: 0.1,
-      align: "center",
-      valign: "middle",
-      lineSpacingMultiple: 1.0,
-      runs: [
-        { text: "毎年あらたに生まれる投資余力　", size: 14, bold: true, color: C.slate },
-        { text: "約3,000万円／年", size: 22, bold: true, color: C.sekisui, break: true },
-        { text: "本業の利益 約700万 ＋ 減価償却 約2,460万（毎年つくり出せるお金）", size: 11, color: C.gray },
-      ],
-    });
-    // 行3：予備と入金待ち
-    els.push({
-      type: "text",
-      x: 1.0,
-      y: 5.0,
-      w: 5.55,
-      h: 1.15,
-      fill: C.white,
-      line: { color: "E0E0DA", width: 1 },
-      radius: 0.1,
-      align: "center",
-      valign: "middle",
-      lineSpacingMultiple: 1.0,
-      runs: [
-        { text: "予備：保険積立金 約3,000万円", size: 13, bold: true, color: C.wellness, break: true },
-        { text: "解約・契約者貸付で、いざという時の原資に", size: 10, color: C.slate },
-      ],
-    });
-    els.push({
-      type: "text",
-      x: 6.75,
-      y: 5.0,
-      w: 5.55,
-      h: 1.15,
-      fill: C.white,
-      line: { color: "E0E0DA", width: 1 },
-      radius: 0.1,
-      align: "center",
-      valign: "middle",
-      lineSpacingMultiple: 1.0,
-      runs: [
-        { text: "売掛金 約4,400万円", size: 13, bold: true, color: C.food, break: true },
-        { text: "まだ未回収＝これから入ってくるお金", size: 10, color: C.slate },
-      ],
-    });
-    els.push({
-      type: "text",
-      x: 1.0,
-      y: 6.42,
-      w: 11.3,
-      h: 0.5,
-      align: "center",
-      valign: "middle",
-      lineSpacingMultiple: 1.0,
-      runs: [
-        { text: "※第26期決算（R6.7〜R7.6）からの概算。定期預金の担保の有無・預金の内訳は通帳／勘定科目内訳明細書で要確認。", size: 10, italic: true, color: C.gray },
-      ],
-    });
-    slides.push({ bg: C.cream, els });
-  }
-
-  // --- 13. ビジョン（将来像） ---
+  // --- 16. ビジョン（将来像） ---
   {
     const els = [];
     els.push({ type: "rect", x: 0, y: 0, w: SLIDE_W, h: SLIDE_H, fill: C.green });
@@ -1042,12 +1040,12 @@ function buildSlides() {
         { text: "宮城の“ととのう暮らし”をつくる会社に。", size: 20, bold: true, color: "F0F6F0" },
       ],
     });
-    slides.push({ bg: C.green, els });
+    slides.push({ bg: C.green, els, noPage: true });
   }
 
-  // --- 14. みんなへ ---
+  // --- 17. みんなへ ---
   {
-    const els = frame("みんなへ", "変わるのは「数」じゃない。社会との“つながり”が広がること。", 14);
+    const els = frame("みんなへ", "変わるのは「数」じゃない。社会との“つながり”が広がること。");
     els.push(
       ...bullets(1.0, 2.25, 11.0, [
         { head: "土台は、これまでと同じ。", sub: "技術と、誠実さと、人。約30年で積み上げたものは、これからも私たちの中心です。" },
@@ -1069,6 +1067,22 @@ function buildSlides() {
     });
     slides.push({ bg: C.cream, els });
   }
+
+  // ===== ページ番号を自動付与（表紙・組織図・ビジョンは除く） =====
+  slides.forEach((s, i) => {
+    if (i === 0 || s.noPage) return;
+    const dark = s.bg === C.green;
+    s.els.push({
+      type: "text",
+      x: 12.2,
+      y: 6.98,
+      w: 0.9,
+      h: 0.34,
+      align: "right",
+      valign: "middle",
+      runs: [{ text: String(i + 1), size: 11, color: dark ? "CFE3CF" : C.gray }],
+    });
+  });
 
   return slides;
 }
