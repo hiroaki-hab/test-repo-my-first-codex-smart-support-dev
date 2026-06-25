@@ -546,7 +546,238 @@ function buildSlides() {
     slides.push({ bg: C.cream, els });
   }
 
-  // --- 9. ビジョン（将来像） ---
+  // --- 9. ロードマップ ---
+  {
+    const els = frame("ロードマップ", "5つの事業がそろうまで、そして、その先へ。", 9);
+    // タイムライン矢印
+    els.push({ type: "line", x: 1.0, y: 2.22, w: 11.3, h: 0, color: C.green, width: 2.5, endArrow: true });
+    const phases = [
+      {
+        c: C.slate,
+        title: "これまで（〜2024）",
+        items: [
+          { y: "1998", t: "創業。積水ハウス不動産の原状回復・リノベを本業に" },
+          { y: "2023", t: "ランドリー事業 開始（コインランドリー moco）" },
+          { y: "2024", t: "サウナ事業に着手（KÖWA SAUNA 開発）" },
+        ],
+      },
+      {
+        c: C.green,
+        title: "いま（2025〜2026）",
+        items: [
+          { y: "2025.7", t: "穀物乾燥機の組立を請負（朝日製作所）" },
+          { y: "2026.7", t: "ランドリー周辺の新規業務が本格化" },
+          { y: "2026.8", t: "新体制スタート・ウェルネス事業 開始" },
+        ],
+      },
+      {
+        c: C.laundry,
+        title: "これから（2027〜）",
+        items: [
+          { y: "2027〜", t: "サウナ体験型ショールームを展開" },
+          { y: "約2年後", t: "カフェ：POPUP → クラファン → 店舗出店" },
+          { y: "目標", t: "5事業で年商7億円へ" },
+        ],
+      },
+    ];
+    const cw = 3.6;
+    const gap = 0.28;
+    let x = 1.0;
+    phases.forEach((ph) => {
+      els.push({ type: "rect", x: x + cw / 2 - 0.09, y: 2.13, w: 0.18, h: 0.18, fill: ph.c, radius: 0.09 });
+      els.push({
+        type: "text",
+        x,
+        y: 2.55,
+        w: cw,
+        h: 0.6,
+        fill: ph.c,
+        radius: 0.1,
+        align: "center",
+        valign: "middle",
+        runs: [{ text: ph.title, size: 14, bold: true, color: C.white }],
+      });
+      let iy = 3.35;
+      ph.items.forEach((it) => {
+        els.push({
+          type: "text",
+          x,
+          y: iy,
+          w: cw,
+          h: 0.95,
+          fill: C.white,
+          line: { color: "E0E0DA", width: 1 },
+          radius: 0.08,
+          align: "left",
+          valign: "middle",
+          lineSpacingMultiple: 1.0,
+          runs: [
+            { text: it.y + "　", size: 12.5, bold: true, color: ph.c },
+            { text: it.t, size: 11.5, color: C.slate },
+          ],
+        });
+        iy += 1.05;
+      });
+      x += cw + gap;
+    });
+    slides.push({ bg: C.cream, els });
+  }
+
+  // --- 10. 数字で見る目標 ---
+  {
+    const els = frame("数字で見る目標", "現在地は約4.65億円。目指すは、年商7億円。", 10);
+    // 現在地 → 目標 の比較バンド
+    els.push({
+      type: "text",
+      x: 1.0,
+      y: 1.95,
+      w: 4.55,
+      h: 1.05,
+      fill: C.slate,
+      radius: 0.1,
+      align: "center",
+      valign: "middle",
+      lineSpacingMultiple: 1.0,
+      runs: [
+        { text: "現在地　", size: 13, bold: true, color: "D8DDE0" },
+        { text: "約4.65億円", size: 24, bold: true, color: C.white, break: true },
+        { text: "第26期（R6.7〜R7.6）売上高", size: 9.5, color: "D8DDE0" },
+      ],
+    });
+    els.push({
+      type: "text",
+      x: 5.65,
+      y: 1.95,
+      w: 2.0,
+      h: 1.05,
+      align: "center",
+      valign: "middle",
+      lineSpacingMultiple: 1.0,
+      runs: [
+        { text: "＋2.35億", size: 14, bold: true, color: C.laundry, break: true },
+        { text: "›", size: 30, bold: true, color: C.green },
+      ],
+    });
+    els.push({
+      type: "text",
+      x: 7.75,
+      y: 1.95,
+      w: 4.55,
+      h: 1.05,
+      fill: C.green,
+      radius: 0.1,
+      align: "center",
+      valign: "middle",
+      lineSpacingMultiple: 1.0,
+      runs: [
+        { text: "目標　", size: 13, bold: true, color: "CFE3CF" },
+        { text: "7億円", size: 26, bold: true, color: C.white, break: true },
+        { text: "5事業の合計で", size: 9.5, color: "CFE3CF" },
+      ],
+    });
+    // 7億の内訳 積み上げバー（3 : 2 : 1 : 1）
+    els.push({
+      type: "text",
+      x: 1.0,
+      y: 3.25,
+      w: 11.3,
+      h: 0.32,
+      align: "left",
+      valign: "middle",
+      runs: [{ text: "目標 7億円の内訳", size: 12, bold: true, color: C.slate }],
+    });
+    const segs = [
+      { c: C.sekisui, amt: 3, label: "3億" },
+      { c: C.laundry, amt: 2, label: "2億" },
+      { c: C.green, amt: 1, label: "1億" },
+      { c: C.sauna, amt: 1, label: "1億" },
+    ];
+    const barX = 1.0;
+    const barY = 3.62;
+    const barW = 11.3;
+    const barH = 0.82;
+    const total = 7;
+    let sx = barX;
+    segs.forEach((s) => {
+      const w = barW * (s.amt / total);
+      els.push({
+        type: "text",
+        x: sx,
+        y: barY,
+        w,
+        h: barH,
+        fill: s.c,
+        radius: 0.04,
+        align: "center",
+        valign: "middle",
+        runs: [{ text: s.label, size: 16, bold: true, color: C.white }],
+      });
+      sx += w;
+    });
+    // 凡例カード
+    const legend = [
+      { c: C.sekisui, name: "リフォーム本業", sub: "積水ハウス不動産 等", amt: "3億円", note: "会社の土台（実績あり）" },
+      { c: C.laundry, name: "ランドリー事業", sub: "moco・穀物乾燥機", amt: "2億円", note: "第2の柱へ" },
+      { c: C.green, name: "代表直轄リフォーム", sub: "LIXIL等・広顕の現場", amt: "1億円", note: "社長の現場力" },
+      { c: C.sauna, name: "新規3事業", sub: "サウナ・ウェルネス・カフェ", amt: "1億円", note: "これからの種" },
+    ];
+    const lcw = 2.7;
+    const lgap = 0.17;
+    let lx = 1.0;
+    legend.forEach((l) => {
+      els.push({ type: "rect", x: lx, y: 4.72, w: lcw, h: 1.62, fill: C.white, line: { color: l.c, width: 1.5 }, radius: 0.1 });
+      els.push({
+        type: "text",
+        x: lx + 0.18,
+        y: 4.82,
+        w: lcw - 0.36,
+        h: 0.62,
+        align: "left",
+        valign: "middle",
+        lineSpacingMultiple: 0.98,
+        runs: [
+          { text: l.name, size: 12.5, bold: true, color: l.c, break: true },
+          { text: l.sub, size: 8.5, color: C.gray },
+        ],
+      });
+      els.push({
+        type: "text",
+        x: lx + 0.18,
+        y: 5.46,
+        w: lcw - 0.36,
+        h: 0.5,
+        align: "left",
+        valign: "middle",
+        runs: [{ text: l.amt, size: 20, bold: true, color: l.c }],
+      });
+      els.push({
+        type: "text",
+        x: lx + 0.18,
+        y: 5.96,
+        w: lcw - 0.36,
+        h: 0.32,
+        align: "left",
+        valign: "middle",
+        runs: [{ text: l.note, size: 9.5, color: C.slate }],
+      });
+      lx += lcw + lgap;
+    });
+    els.push({
+      type: "text",
+      x: 1.0,
+      y: 6.52,
+      w: 11.3,
+      h: 0.42,
+      align: "center",
+      valign: "middle",
+      runs: [
+        { text: "本業（約4.3億の工事実績）を土台に、ランドリーと新規事業を伸ばして＋2.35億。全体で7億へ。", size: 12, italic: true, color: C.slate },
+      ],
+    });
+    slides.push({ bg: C.cream, els });
+  }
+
+  // --- 11. ビジョン（将来像） ---
   {
     const els = [];
     els.push({ type: "rect", x: 0, y: 0, w: SLIDE_W, h: SLIDE_H, fill: C.green });
@@ -593,9 +824,9 @@ function buildSlides() {
     slides.push({ bg: C.green, els });
   }
 
-  // --- 10. みんなへ ---
+  // --- 12. みんなへ ---
   {
-    const els = frame("みんなへ", "変わるのは「数」じゃない。社会との“つながり”が広がること。", 10);
+    const els = frame("みんなへ", "変わるのは「数」じゃない。社会との“つながり”が広がること。", 12);
     els.push(
       ...bullets(1.0, 2.25, 11.0, [
         { head: "土台は、これまでと同じ。", sub: "技術と、誠実さと、人。25年で積み上げたものは、これからも私たちの中心です。" },
