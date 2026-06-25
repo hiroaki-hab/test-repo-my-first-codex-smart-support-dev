@@ -151,7 +151,7 @@ function buildSlides() {
       align: "left",
       valign: "middle",
       runs: [
-        { text: "有限会社 光和工業（宮城県黒川郡大和町・1998年創業）", size: 12, color: C.gray },
+        { text: "有限会社 光和工業（宮城県黒川郡大和町・1997年創業）", size: 12, color: C.gray },
       ],
     });
     slides.push({ bg: C.cream, els });
@@ -159,10 +159,10 @@ function buildSlides() {
 
   // --- 2. これまでの私たち ---
   {
-    const els = frame("これまでの私たち", "リフォーム屋として、25年で積み上げてきたもの。", 2);
+    const els = frame("これまでの私たち", "リフォーム屋として、約30年で積み上げてきたもの。", 2);
     els.push(
       ...bullets(1.0, 2.15, 7.0, [
-        { head: "1998年、大和町で創業。", sub: "積水ハウス不動産の原状回復・リノベを支えるリフォーム屋として。" },
+        { head: "1997年、大和町で創業。", sub: "積水ハウス不動産の原状回復・リノベを支えるリフォーム屋として。" },
         { head: "培ったのは「空間を直す技術」。", sub: "退去・原状回復・アフター・定期巡回 ― 現場の段取り力と確かな手仕事。" },
         { head: "そして何より、信頼。", sub: "任せてもらえる関係を、一件ずつ積み重ねてきた。" },
       ])
@@ -556,7 +556,7 @@ function buildSlides() {
         c: C.slate,
         title: "これまで（〜2024）",
         items: [
-          { y: "1998", t: "創業。積水ハウス不動産の原状回復・リノベを本業に" },
+          { y: "1997", t: "創業。積水ハウス不動産の原状回復・リノベを本業に" },
           { y: "2023", t: "ランドリー事業 開始（コインランドリー moco）" },
           { y: "2024", t: "サウナ事業に着手（KÖWA SAUNA 開発）" },
         ],
@@ -717,9 +717,9 @@ function buildSlides() {
     // 凡例カード
     const legend = [
       { c: C.sekisui, name: "リフォーム本業", sub: "積水ハウス不動産 等", amt: "3億円", note: "会社の土台（実績あり）" },
-      { c: C.laundry, name: "ランドリー事業", sub: "moco・穀物乾燥機", amt: "2億円", note: "第2の柱へ" },
+      { c: C.laundry, name: "ランドリー事業", sub: "moco・穀物乾燥機", amt: "2億円", note: "現状 約1億 → 倍増へ" },
       { c: C.green, name: "代表直轄リフォーム", sub: "LIXIL等・広顕の現場", amt: "1億円", note: "社長の現場力" },
-      { c: C.sauna, name: "新規3事業", sub: "サウナ・ウェルネス・カフェ", amt: "1億円", note: "これからの種" },
+      { c: C.sauna, name: "新規3事業", sub: "サウナ・ウェルネス・カフェ", amt: "1億円", note: "現状ほぼ0 → 育てる" },
     ];
     const lcw = 2.7;
     const lgap = 0.17;
@@ -771,13 +771,91 @@ function buildSlides() {
       align: "center",
       valign: "middle",
       runs: [
-        { text: "本業（約4.3億の工事実績）を土台に、ランドリーと新規事業を伸ばして＋2.35億。全体で7億へ。", size: 12, italic: true, color: C.slate },
+        { text: "本業（約4.3億の工事実績）を土台に、ランドリー（現状約1億）を倍増、新規事業1億を加えて7億へ。", size: 12, italic: true, color: C.slate },
       ],
     });
     slides.push({ bg: C.cream, els });
   }
 
-  // --- 11. ビジョン（将来像） ---
+  // --- 11. 投資と資源 ---
+  {
+    const els = frame("投資と資源", "7億への原資を、どう生み出すか。", 11);
+    const items = [
+      {
+        c: C.green,
+        t: "内部資金（自前のキャッシュ）",
+        b: "本業の利益と減価償却で、年あたり数千万円規模の投資余力。手元資金も約7,800万円。まず自分たちの稼ぎを元手にする。",
+      },
+      {
+        c: C.sekisui,
+        t: "自社の資産を活かす",
+        b: "本社・仙台のランドリー・アパートなど、自社で持つ土地建物（約8億円規模）を、新しい事業の「場」として転用する。",
+      },
+      {
+        c: C.laundry,
+        t: "外部資金の活用",
+        b: "新事業進出補助金（サウナ展示施設）などの補助金や借入を組み合わせ、大きな設備投資をまかなう。使える制度は使う。",
+      },
+      {
+        c: C.wellness,
+        t: "最大の資源は「人」",
+        b: "マルチスキル化（油谷モデル）で、限られた人数を横断活用。採用と育成にも投資し、一人ひとりの力を最大化する。",
+      },
+    ];
+    const cw = 5.6;
+    const ch = 1.6;
+    const positions = [
+      [1.0, 2.1],
+      [6.85, 2.1],
+      [1.0, 3.85],
+      [6.85, 3.85],
+    ];
+    items.forEach((it, i) => {
+      const [x, y] = positions[i];
+      els.push({ type: "rect", x, y, w: 0.12, h: ch, fill: it.c, radius: 0.03 });
+      els.push({
+        type: "text",
+        x: x + 0.28,
+        y: y - 0.02,
+        w: cw - 0.4,
+        h: 0.5,
+        align: "left",
+        valign: "middle",
+        runs: [{ text: it.t, size: 16, bold: true, color: it.c }],
+      });
+      els.push({
+        type: "text",
+        x: x + 0.28,
+        y: y + 0.5,
+        w: cw - 0.4,
+        h: 1.05,
+        align: "left",
+        valign: "top",
+        lineSpacingMultiple: 1.1,
+        runs: [{ text: it.b, size: 13, color: C.slate }],
+      });
+    });
+    // 進め方バナー
+    els.push({
+      type: "text",
+      x: 1.0,
+      y: 5.7,
+      w: 11.3,
+      h: 0.9,
+      fill: C.slate,
+      radius: 0.1,
+      align: "center",
+      valign: "middle",
+      lineSpacingMultiple: 1.05,
+      runs: [
+        { text: "進め方　", size: 15, bold: true, color: C.white },
+        { text: "本業のキャッシュを土台に、新規は小さく試して育てる（カフェは POPUP → クラファン → 店舗）。", size: 13, color: "EDEDEF" },
+      ],
+    });
+    slides.push({ bg: C.cream, els });
+  }
+
+  // --- 12. ビジョン（将来像） ---
   {
     const els = [];
     els.push({ type: "rect", x: 0, y: 0, w: SLIDE_W, h: SLIDE_H, fill: C.green });
@@ -824,12 +902,12 @@ function buildSlides() {
     slides.push({ bg: C.green, els });
   }
 
-  // --- 12. みんなへ ---
+  // --- 13. みんなへ ---
   {
-    const els = frame("みんなへ", "変わるのは「数」じゃない。社会との“つながり”が広がること。", 12);
+    const els = frame("みんなへ", "変わるのは「数」じゃない。社会との“つながり”が広がること。", 13);
     els.push(
       ...bullets(1.0, 2.25, 11.0, [
-        { head: "土台は、これまでと同じ。", sub: "技術と、誠実さと、人。25年で積み上げたものは、これからも私たちの中心です。" },
+        { head: "土台は、これまでと同じ。", sub: "技術と、誠実さと、人。約30年で積み上げたものは、これからも私たちの中心です。" },
         { head: "広がるのは、社会と関わる“面”。", sub: "住まいから、健康・食・地域・産業へ。私たちが役に立てる場所が増えていきます。" },
         { head: "新しい挑戦に、あなたの力を。", sub: "どの事業にも、一人ひとりの経験と工夫が必要です。やってみたいことは、ぜひ声に。" },
       ], { gap: 0.95, size: 16 })
