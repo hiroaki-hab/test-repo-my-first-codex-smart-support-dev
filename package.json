@@ -5,7 +5,9 @@
   "main": "generate_org_chart.js",
   "scripts": {
     "generate": "node generate_org_chart.js",
-    "preview": "node preview.js"
+    "preview": "node preview.js",
+    "generate:vision": "node generate_vision_deck.js",
+    "preview:vision": "node preview_vision.js"
   },
   "repository": {
     "type": "git",
