@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<style>
+  @page { size: A4 portrait; margin: 10mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "IPAPGothic", "IPAGothic", sans-serif; color: #1a1a1a; font-size: 12px; line-height: 1.5; }
+  h1 { font-size: 19px; margin-bottom: 2px; }
+  .sub { color: #555; font-size: 10px; margin-bottom: 8px; }
+  .badge { display: inline-block; background: #b45309; color: #fff; border-radius: 3px; padding: 2px 8px; font-size: 11px; margin-left: 8px; vertical-align: middle; }
+  h2 { font-size: 14px; background: #1f3a5f; color: #fff; padding: 4px 10px; margin: 14px 0 6px; border-radius: 2px; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { border: 1px solid #999; padding: 5px 8px; text-align: left; vertical-align: top; }
+  th { background: #eef2f7; width: 110px; white-space: nowrap; font-weight: bold; }
+  .warn { color: #b40000; font-weight: bold; }
+  .gantt th, .gantt td { text-align: center; padding: 4px 2px; }
+  .gantt th { width: auto; }
+  .gantt .colL { width: 90px; } .gantt .colG { width: 70px; }
+  .gantt td.lbl { text-align: left; padding-left: 6px; }
+  .sat { background: #eaf2fb; } .sun, .hol { background: #fdecec; }
+  .bar-naiso { background: #2f6fb3; color: #fff; font-size: 10px; }
+  .bar-biso { background: #2e8b57; color: #fff; font-size: 10px; }
+  ul { padding-left: 20px; }
+  li { margin-bottom: 3px; }
+  .photo-empty { border: 2px dashed #aaa; color: #777; text-align: center; padding: 20px 10px; border-radius: 4px; font-size: 11px; }
+  .big { font-size: 13px; font-weight: bold; }
+  .memo th.d { width: 52px; }
+  .memo td { font-size: 11.5px; }
+  .memo .hit { background: #fff7df; }
+  .point { background: #fff7df; border: 1px solid #d8b64e; border-radius: 4px; padding: 8px 12px; margin-top: 6px; }
+  .point b.t { display: block; margin-bottom: 3px; }
+  .footer { margin-top: 12px; font-size: 9px; color: #777; }
+</style>
+</head>
+<body>
+
+<h1>現場資料　明石台 石井様邸（クロス張替・追加）<span class="badge">v2</span></h1>
+<div class="sub">更新日：2026/07/16　作成：光和工業 工程管理（AI整理・社長確認済のもののみ確定）／v2＝メール洗い出し「やり取りメモ」を追加</div>
+
+<h2>1. 物件</h2>
+<table>
+  <tr><th>物件名</th><td class="big">明石台 石井様邸（クロス張替・追加）　※施主：石井精一様（LIXIL書類より）</td></tr>
+  <tr><th>住所</th><td class="warn">⚠️確認中（「明石台」＝仙台市泉区／富谷市のいずれか）</td></tr>
+  <tr><th>工期（仮）</th><td class="big">2026/07/21（火）〜 07/23（木）<span class="warn">　⚠️業者・施主都合 未確認</span></td></tr>
+  <tr><th>担当業者</th><td>クロス張替＝<b>BLUE</b>　／　美装＝<b>光和工業</b></td></tr>
+  <tr><th>窓口</th><td>光和工業（発注元：LIXIL 佐藤(保)様・鈴木優嘉様 経由）</td></tr>
+</table>
+
+<h2>2. 工程</h2>
+<table class="gantt">
+  <tr>
+    <th class="colL">作業</th><th class="colG">業者</th>
+    <th class="hol">7/20<br>月祝</th><th>7/21<br>火</th><th>7/22<br>水</th><th>7/23<br>木</th><th>7/24<br>金</th><th class="sat">7/25<br>土</th>
+  </tr>
+  <tr>
+    <td class="lbl">クロス張替（階段含む）</td><td>BLUE</td>
+    <td class="hol"></td><td colspan="3" class="bar-naiso">7/21〜23（3日間）</td><td></td><td class="sat"></td>
+  </tr>
+  <tr>
+    <td class="lbl">美装・引渡し前清掃</td><td>光和工業</td>
+    <td class="hol"></td><td></td><td></td><td class="bar-biso">7/23</td><td></td><td class="sat"></td>
+  </tr>
+</table>
+
+<h2>3. 作業内容</h2>
+<ul>
+  <li>追加内装工事／<b>クロス張替（階段部含む）</b></li>
+  <li>品番：<b>サンゲツ SP2503（壁・天井とも）</b>　※4月のLDK工事と同品番で統一</li>
+  <li>範囲：<b>「内装工事範囲-2.pdf」参照</b>（6/3 LIXILメール添付）＋現場写真4枚あり（5/19受領）</li>
+  <li>美装：クロス完了後、引渡し前清掃（7/23 仮置き。時間調整要なら7/24へ）</li>
+</ul>
+<div class="point">
+  <b class="t">🔧 業者さん向けポイント（メールより抽出）</b>
+  ・<b>階段部分の張替あり</b> → 脚立・足場の段取りを想定しておくこと（5/19メールで施工可否確認あり）<br>
+  ・品番の取り違え注意：<b>今回はクロス SP2503</b>。過去のトイレ床CF（HM-16086）とは別物<br>
+  ・この現場は4月から継続案件（LDKクロス・IH・玄関ドア・トイレ2台交換・床CF済み）。<b>既工事箇所を傷つけない養生</b>を
+</div>
+
+<h2>4. やり取りメモ（メール洗い出し・時系列）</h2>
+<table class="memo">
+  <tr><th class="d">日付</th><th style="width:90px">相手</th><th>指示・決定の要点</th></tr>
+  <tr><td>4/17</td><td>LIXIL 佐藤(保)様</td><td>LDKクロス品番＝壁・天井とも<b>サンゲツSP2503</b>。当初予定：IHヒーター4/28／LDクロス4/27〜30／玄関ドア塗装4/27〜30</td></tr>
+  <tr><td>4/20</td><td>同</td><td>4/27〜の工事資料受領。<b>食器棚扉の修繕</b>も4/27〜30で依頼あり</td></tr>
+  <tr><td>4/29</td><td>同</td><td><b>トイレ工事5/15(金)確定</b>。1・2階の2台交換＋床CF張替（1・2階とも、<b>CF＝サンゲツHM-16086</b>）。図面PDF2点受領</td></tr>
+  <tr><td>5/1</td><td>同</td><td>玄関ドア不具合（<b>①塗装一部剥がれ ②内部チェーン変形</b>）→ 5/15トイレ工事時に合わせて対応依頼。写真5枚受領</td></tr>
+  <tr><td>5/19</td><td>同</td><td><b>追加クロス張替の打診。階段部分含む</b>（施工可否の確認）。現場写真4枚受領（鈴木優嘉様経由）</td></tr>
+  <tr class="hit"><td>6/3</td><td>同</td><td><b>【今回工事の確定指示】</b>6/23〜25で段取り依頼。クロス＝<b>サンゲツSP2503</b>。範囲図<b>「内装工事範囲-2.pdf」</b>受領</td></tr>
+  <tr><td>7/15</td><td>（社内）</td><td>6月版工程を<b>7月後半（7/21〜23 仮）</b>へ組み直し。シートZ「仮工程_受信」へ送信済み（状態=仮）</td></tr>
+</table>
+<div class="sub" style="margin-top:4px">※事務系（完了書類・注文請書の再提出等）は光和側処理のため本表から除外。詳細はメモフォルダの「20260716_メール洗い出し_やり取りメモ.md」参照。</div>
+
+<h2>5. 現場情報（駐車・鍵・搬入・注意点）</h2>
+<div class="photo-empty">現調後に記載します（駐車場所／入室方法／搬入経路／在宅状況／養生範囲）<br>— 社長がスマホから現調メモを投げると、ここに整理されます —</div>
+
+<h2>6. 写真台帳</h2>
+<div class="photo-empty">現調写真 受領待ち（メール添付の現場写真4枚・範囲図PDFは取り込み可能です。必要なら指示ください）<br>— スマホから写真を投げると、ここに「場所＋指示」のキャプション付きで並びます —</div>
+
+<h2>7. ⚠️ 要確認（未確定）</h2>
+<ul>
+  <li class="warn">住所：仙台市泉区／富谷市 どちらの「明石台」か</li>
+  <li class="warn">工期：BLUEさん・石井様の都合確認（7/21〜23 仮）</li>
+  <li class="warn">美装の時間帯（7/23 クロス完了後 or 7/24）</li>
+  <li class="warn">玄関ドア対応（塗装剥がれ・チェーン変形）が5/15に完了済みか ※未了なら今回工事で同時対応の検討を</li>
+  <li class="warn">食器棚扉修繕・IHヒーター交換（4月工事分）が完了済みか</li>
+</ul>
+
+<div class="footer">光和工業　現場資料（業者共有用）／本資料の工程は「仮」。確定はメイン台帳（社長管理）が正。</div>
+
+</body>
+</html>
