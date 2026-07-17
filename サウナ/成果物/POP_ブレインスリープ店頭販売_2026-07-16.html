@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>店頭POP：ブレインスリープ全品10%OFF（KÖWA SAUNA）</title>
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #e8e8e8; }
+  body {
+    font-family: "Yu Gothic", "YuGothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .sheet {
+    width: 210mm;
+    min-height: 296mm;
+    margin: 10mm auto;
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0,0,0,.25);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  @media print {
+    html, body { background: #fff; }
+    .sheet { margin: 0; box-shadow: none; }
+    .no-print { display: none !important; }
+  }
+
+  /* ヘッダー */
+  .header {
+    background: linear-gradient(135deg, #0c1b33 0%, #16305c 60%, #1d4380 100%);
+    color: #fff;
+    padding: 11mm 12mm 9mm;
+    position: relative;
+  }
+  .header .agency {
+    display: inline-block;
+    border: 1px solid rgba(255,255,255,.6);
+    border-radius: 999px;
+    font-size: 10.5pt;
+    letter-spacing: .12em;
+    padding: 1.2mm 5mm;
+    margin-bottom: 4mm;
+  }
+  .header h1 {
+    font-size: 25pt;
+    font-weight: 800;
+    line-height: 1.35;
+    letter-spacing: .04em;
+  }
+  .header h1 .accent { color: #7fd4ff; }
+  .header .sub {
+    margin-top: 3.5mm;
+    font-size: 12pt;
+    letter-spacing: .06em;
+    color: #cfe3ff;
+  }
+
+  /* 10%OFF帯 */
+  .offband {
+    background: #f5b301;
+    color: #0c1b33;
+    text-align: center;
+    padding: 4.5mm 0;
+    font-weight: 800;
+    font-size: 17.5pt;
+    letter-spacing: .08em;
+  }
+  .offband small { font-size: 10.5pt; font-weight: 700; }
+
+  /* 本文 */
+  .body { flex: 1; padding: 8mm 12mm 6mm; }
+
+  .lead {
+    text-align: center;
+    font-size: 11.5pt;
+    line-height: 1.7;
+    color: #333;
+    margin-bottom: 6mm;
+  }
+  .lead b { color: #16305c; }
+
+  .product {
+    display: flex;
+    border: 2px solid #16305c;
+    border-radius: 3mm;
+    margin-bottom: 5.5mm;
+    overflow: hidden;
+  }
+  .product .info { flex: 1; padding: 5mm 6mm; }
+  .product .name {
+    font-size: 14.5pt;
+    font-weight: 800;
+    color: #0c1b33;
+    margin-bottom: 1.5mm;
+  }
+  .product .name small {
+    font-size: 10pt;
+    font-weight: 700;
+    color: #666;
+    margin-left: 2mm;
+  }
+  .product .feature {
+    font-size: 10pt;
+    line-height: 1.65;
+    color: #333;
+  }
+  .product .price {
+    width: 62mm;
+    background: #f2f6fc;
+    border-left: 2px solid #16305c;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4mm 3mm;
+    text-align: center;
+  }
+  .price .regular {
+    font-size: 10pt;
+    color: #666;
+    text-decoration: line-through;
+    text-decoration-color: #d33;
+    text-decoration-thickness: 1.5px;
+  }
+  .price .sale {
+    font-size: 20pt;
+    font-weight: 800;
+    color: #c1272d;
+    line-height: 1.15;
+    margin-top: 1mm;
+  }
+  .price .sale .yen { font-size: 13pt; }
+  .price .zeinuki { font-size: 8.5pt; color: #777; margin-top: 1mm; }
+
+  /* 体感ボックス */
+  .try {
+    background: #eaf6ff;
+    border: 2px dashed #1d4380;
+    border-radius: 3mm;
+    padding: 4.5mm 6mm;
+    margin-top: 1mm;
+  }
+  .try .try-title {
+    font-weight: 800;
+    color: #16305c;
+    font-size: 12.5pt;
+    margin-bottom: 1.5mm;
+  }
+  .try p { font-size: 10.5pt; line-height: 1.65; color: #222; }
+
+  /* フッター */
+  .footer {
+    background: #0c1b33;
+    color: #cfe3ff;
+    padding: 4.5mm 12mm;
+    font-size: 9.5pt;
+    line-height: 1.7;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer .shop { font-size: 12pt; font-weight: 800; color: #fff; letter-spacing: .1em; }
+
+  .note { font-size: 8.5pt; color: #888; margin-top: 3mm; line-height: 1.6; }
+
+  .print-hint {
+    max-width: 210mm; margin: 0 auto 10mm; text-align: center;
+    font-size: 10pt; color: #555;
+  }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+
+  <div class="header">
+    <span class="agency">ブレインスリープ 正規代理店</span>
+    <h1>サウナで、ととのう。<br>ブレインスリープで、<span class="accent">眠りもととのう。</span></h1>
+    <div class="sub">スタンフォード式 睡眠科学から生まれた「脳が眠る」寝具、当店で買えます。</div>
+  </div>
+
+  <div class="offband">
+    店内展示の全品　定価より <span style="font-size:24pt;">10%OFF</span>　<small>で販売中！</small>
+  </div>
+
+  <div class="body">
+
+    <p class="lead">
+      サウナ後の深睡眠を、おうちでも。<b>『スタンフォード式 最高の睡眠』著者・西野精治教授</b>が開発を監修した
+      ブレインスリープの寝具を、当店価格でお持ち帰りいただけます。
+    </p>
+
+    <div class="product">
+      <div class="info">
+        <div class="name">ブレインスリープ ピロー <small>枕</small></div>
+        <div class="feature">
+          頭を冷やして速く深く眠る、「脳を冷やす」枕。90%以上が空気の特殊素材で通気性抜群、
+          シャワーで丸洗いOK。使うほど自分の頭にフィットします。
+        </div>
+      </div>
+      <div class="price">
+        <span class="regular">定価 ¥33,000（税込）</span>
+        <span class="sale"><span class="yen">¥</span>29,700</span>
+        <span class="zeinuki">税込／（税抜 ¥27,000）</span>
+      </div>
+    </div>
+
+    <div class="product">
+      <div class="info">
+        <div class="name">ブレインスリープ マットレス フロート <small>シングル</small></div>
+        <div class="feature">
+          「浮遊感」のある寝心地で腰・肩の負担を分散。抜群の通気性で夏も蒸れにくく、
+          サウナ後の火照った体もぐっすり。今のベッドに重ねるだけでも使えます。
+        </div>
+      </div>
+      <div class="price">
+        <span class="regular">定価 ¥88,000（税込）</span>
+        <span class="sale"><span class="yen">¥</span>79,200</span>
+        <span class="zeinuki">税込／（税抜 ¥72,000）</span>
+      </div>
+    </div>
+
+    <div class="product">
+      <div class="info">
+        <div class="name">ブレインスリープ マットレス オーバーレイ <small>ダブル</small></div>
+        <div class="feature">
+          お手持ちのマットレス・敷布団に重ねるだけで寝心地をアップグレード。
+          通気性のよい立体構造で、丸洗いできて清潔です。
+        </div>
+      </div>
+      <div class="price">
+        <span class="regular">定価 ¥57,200（税込）</span>
+        <span class="sale"><span class="yen">¥</span>51,480</span>
+        <span class="zeinuki">税込／（税抜 ¥52,000）</span>
+      </div>
+    </div>
+
+    <div class="try">
+      <div class="try-title">🛋️ 実は、もう体感しています。</div>
+      <p>
+        店内の休憩チェアに掛けてあるカバー——あれが「マットレス オーバーレイ」の実物です。
+        座り心地の良さ、通気性の気持ちよさ、ぜひ確かめてみてください。
+        気になった方はスタッフまでお声がけを。
+      </p>
+    </div>
+
+    <p class="note">
+      ※価格はすべて2026年7月時点のメーカー定価に基づきます。※在庫状況・お取り寄せの納期はスタッフにご確認ください。
+      ※サイズ・カラーのご希望もご相談いただけます（お取り寄せ対応）。
+    </p>
+
+  </div>
+
+  <div class="footer">
+    <div>
+      <div class="shop">KÖWA SAUNA</div>
+      <div>ブレインスリープ正規代理店　有限会社光和工業</div>
+    </div>
+    <div style="text-align:right;">
+      ご購入・ご相談はスタッフまで<br>お気軽にどうぞ
+    </div>
+  </div>
+
+</div>
+
+<p class="print-hint no-print">
+  🖨️ 印刷方法：このページで Ctrl+P → 用紙A4・余白「なし」・「背景のグラフィック」ON で、そのまま店頭POPになります。
+</p>
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+# 機密・出力物はコミットしない
+.env
+out/
+*.png
+*.jpg
+*.jpeg
+*.webp

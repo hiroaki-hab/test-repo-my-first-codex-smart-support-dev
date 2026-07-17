@@ -11,3 +11,6 @@ state.json
 webhook_url.local.txt
 *.webhook
 *.secret.*
+
+# Python cache
+__pycache__/
