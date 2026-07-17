@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>御見積書 雨樋補修工事</title>
+<style>
+  @page { size: A4; margin: 14mm 14mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Noto Serif CJK JP", "Yu Mincho", "Hiragino Mincho ProN", serif;
+    color: #1a1a1a; font-size: 10.5pt; line-height: 1.5;
+  }
+  .sheet { width: 100%; }
+  h1 {
+    text-align: center; font-size: 24pt; letter-spacing: 1.2em;
+    padding-left: 1.2em; margin: 4mm 0 8mm;
+  }
+  .meta { text-align: right; font-size: 9.5pt; margin-bottom: 2mm; }
+  .head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6mm; }
+  .to { width: 55%; }
+  .to .name { font-size: 14pt; font-weight: bold; border-bottom: 1.5px solid #000; padding-bottom: 1mm; }
+  .to .sub { font-size: 9pt; margin-top: 1.5mm; }
+  .to .greet { margin-top: 5mm; font-size: 10pt; }
+  .from { width: 40%; position: relative; font-size: 9.5pt; }
+  .from .co { font-size: 12pt; font-weight: bold; margin-bottom: 1mm; }
+  .seal {
+    position: absolute; top: -2mm; right: 2mm; width: 21mm; height: 21mm; opacity: .85;
+  }
+  .info { width: 100%; border-collapse: collapse; margin-bottom: 5mm; }
+  .info th, .info td { border: 1px solid #333; padding: 1.6mm 2.5mm; text-align: left; }
+  .info th { width: 24mm; background: #f2f2f2; font-weight: bold; }
+  .amount {
+    border-top: 2.5px solid #000; border-bottom: 2.5px solid #000;
+    text-align: center; font-size: 16pt; font-weight: bold;
+    padding: 3mm 0; margin: 5mm 0 6mm; letter-spacing: .1em;
+  }
+  table.detail { width: 100%; border-collapse: collapse; }
+  .detail th, .detail td { border: 1px solid #333; padding: 1.8mm 2mm; }
+  .detail th { background: #e8eef7; font-weight: bold; text-align: center; font-size: 9.5pt; }
+  .detail td.no { width: 8mm; text-align: center; }
+  .detail td.item { }
+  .detail td.qty { width: 12mm; text-align: center; }
+  .detail td.unit { width: 12mm; text-align: center; }
+  .detail td.price { width: 22mm; text-align: right; }
+  .detail td.amt { width: 26mm; text-align: right; }
+  .detail tr.sum td { font-weight: normal; }
+  .detail tr.total td { font-weight: bold; background: #f7f7f7; }
+  .notes { margin-top: 6mm; font-size: 9pt; }
+  .notes .t { font-weight: bold; margin-bottom: 1mm; }
+  .notes ol { margin-left: 5mm; }
+  .notes li { margin-bottom: .8mm; }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <h1>御見積書</h1>
+  <div class="meta">
+    見積No.　K-20260717-01<br>
+    発行日　2026年7月17日
+  </div>
+  <div class="head">
+    <div class="to">
+      <div class="name">株式会社LIXIL　御中</div>
+      <div class="sub">ご担当：佐藤 保彦 様（(株)エスペラント開発様 物件）</div>
+      <div class="greet">下記の通りお見積り申し上げます。</div>
+    </div>
+    <div class="from">
+      <svg class="seal" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="4" width="92" height="92" fill="none" stroke="#c8281e" stroke-width="6"/>
+        <g fill="#c8281e" font-size="25" font-weight="bold" text-anchor="middle"
+           font-family="'Noto Serif CJK JP','Yu Mincho',serif">
+          <text x="78" y="34">有</text><text x="78" y="62">限</text><text x="78" y="90">会</text>
+          <text x="50" y="34">社</text><text x="50" y="62">光</text><text x="50" y="90">和</text>
+          <text x="22" y="34">工</text><text x="22" y="62">業</text><text x="22" y="90">印</text>
+        </g>
+      </svg>
+      <div class="co">有限会社 光和工業</div>
+      代表取締役　佐藤 広顕<br>
+      〒981-3628 宮城県黒川郡大和町杜の丘1-10-1<br>
+      TEL 022-358-6092　FAX 022-358-8244
+    </div>
+  </div>
+
+  <table class="info">
+    <tr><th>件　名</th><td>雨樋補修工事</td></tr>
+    <tr><th>工事場所</th><td>仙台市太白区ひより台9-10</td></tr>
+    <tr><th>工　期</th><td>御発注後、部材納品次第 約1日（8月中で日程調整可）</td></tr>
+    <tr><th>有効期限</th><td>発行日より30日間</td></tr>
+    <tr><th>支払条件</th><td>工事完了・検収後、翌月末日までに銀行振込</td></tr>
+  </table>
+
+  <div class="amount">御見積金額　　￥135,300 －（税込）</div>
+
+  <table class="detail">
+    <tr><th>No.</th><th>工事項目・仕様</th><th>数量</th><th>単位</th><th>単価</th><th>金額</th></tr>
+    <tr><td class="no">1</td><td class="item">施工費一式（大屋根集水部補修・下屋出隅コーナー材取付・軒樋入替2箇所〔既存撤去含む〕）※高所作業につき2名施工</td><td class="qty">1</td><td class="unit">式</td><td class="price"></td><td class="amt">60,000</td></tr>
+    <tr><td class="no">2</td><td class="item">段取り・調達・完了報告費（部材手配・引取・作業計画・完了報告書）</td><td class="qty">1</td><td class="unit">式</td><td class="price"></td><td class="amt">23,000</td></tr>
+    <tr><td class="no">3</td><td class="item">軒とい　エスロン ライナートップX70U　L=3,600</td><td class="qty">2</td><td class="unit">本</td><td class="price">9,000</td><td class="amt">18,000</td></tr>
+    <tr><td class="no">4</td><td class="item">出ずみ（出隅コーナー）　X70U</td><td class="qty">1</td><td class="unit">個</td><td class="price">2,500</td><td class="amt">2,500</td></tr>
+    <tr><td class="no">5</td><td class="item">副資材一式（のき継手・止まり・接着剤・金具・コーキング）</td><td class="qty">1</td><td class="unit">式</td><td class="price"></td><td class="amt">6,000</td></tr>
+    <tr><td class="no">6</td><td class="item">廃材処分費（撤去樋・端材）</td><td class="qty">1</td><td class="unit">式</td><td class="price"></td><td class="amt">3,000</td></tr>
+    <tr><td class="no">7</td><td class="item">諸経費（車両・燃料・消耗品）</td><td class="qty">1</td><td class="unit">式</td><td class="price"></td><td class="amt">11,000</td></tr>
+    <tr><td class="no">8</td><td class="item">出精値引き</td><td class="qty"></td><td class="unit"></td><td class="price"></td><td class="amt">▲500</td></tr>
+    <tr class="sum"><td colspan="5" style="text-align:right">小　計</td><td class="amt">123,000</td></tr>
+    <tr class="sum"><td colspan="5" style="text-align:right">消費税（10%）</td><td class="amt">12,300</td></tr>
+    <tr class="total"><td colspan="5" style="text-align:right">合　計</td><td class="amt">135,300</td></tr>
+  </table>
+
+  <div class="notes">
+    <div class="t">【備考】</div>
+    <ol>
+      <li>使用部材：積水化学工業 エスロン雨とい「ライナートップX70U」。色は現地の既存樋と照合のうえ確定いたします。</li>
+      <li>部材数量は現地確認後に確定します。定尺長さの不足等により数量が変動した場合は差額精算とさせていただきます。</li>
+      <li>簡易足場は本見積に含みません。現地状況により必要と判断された場合は別途お見積りいたします。</li>
+      <li>既存吊金具の劣化等により交換範囲が拡大する場合は、事前協議のうえ追加費用をご相談させていただきます。</li>
+      <li>工事範囲：(1)大屋根集水部補修　(2)下屋出隅コーナー材取付　(3)軒樋入替2箇所（既存撤去・処分含む）。上記以外の補修は含みません。</li>
+      <li>天候（降雨・強風）により作業日程が変更となる場合があります。</li>
+    </ol>
+  </div>
+</div>
+</body>
+</html>
