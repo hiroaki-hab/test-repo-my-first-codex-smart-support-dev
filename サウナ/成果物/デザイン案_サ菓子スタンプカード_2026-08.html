@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>サ菓子スタンプカード デザイン案</title>
+<style>
+  :root{ --brown:#5b4232; --cream:#faf6ef; --accent:#c8874e; --green:#3e5c50; --line:#d9cbb4; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:"Hiragino Sans","Yu Gothic","Meiryo",sans-serif; background:#e9e2d4; color:var(--brown); padding:30px 16px; }
+  .wrap{ max-width:760px; margin:0 auto; }
+  h1{ font-size:18px; margin-bottom:4px; }
+  .memo{ font-size:12.5px; color:#8a7663; margin-bottom:20px; line-height:1.7; }
+  .cards{ display:flex; gap:24px; flex-wrap:wrap; }
+  .label{ font-size:12px; font-weight:700; color:var(--green); margin:0 0 6px 2px; }
+  /* 名刺サイズ 91×55mm */
+  .card{ width:91mm; height:55mm; background:var(--cream); border:1px solid var(--line); border-radius:3mm;
+         box-shadow:0 2px 8px rgba(0,0,0,.15); padding:5mm 6mm; position:relative; overflow:hidden; }
+  .card .band{ position:absolute; top:0; left:0; right:0; height:3mm; background:linear-gradient(90deg, var(--green) 50%, var(--accent) 50%); }
+  .t-kicker{ font-size:6.5pt; letter-spacing:.32em; color:var(--accent); font-weight:700; margin-top:1.5mm; }
+  .t-main{ font-size:13pt; font-weight:800; line-height:1.3; }
+  .t-sub{ font-size:7pt; color:#8a7663; margin-top:.6mm; }
+  .stamps{ display:flex; gap:4mm; margin-top:3mm; align-items:center; }
+  .stamp{ width:15mm; height:15mm; border:2px dashed var(--accent); border-radius:50%;
+          display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; background:#fff; }
+  .stamp b{ font-size:6.5pt; line-height:1.25; }
+  .stamp span{ font-size:5.5pt; color:#9a8a77; }
+  .plus{ font-size:12pt; color:var(--accent); font-weight:800; }
+  .prize{ flex:1; font-size:6.8pt; line-height:1.45; background:#f4ecdd; border-radius:2mm; padding:1.5mm 2.5mm; }
+  .prize b{ color:var(--green); font-size:8.5pt; }
+  /* 裏面 */
+  .back .shop{ display:flex; justify-content:space-between; gap:4mm; margin-top:3mm; }
+  .back .col{ flex:1; font-size:6.8pt; line-height:1.6; }
+  .back .col b{ font-size:7.5pt; display:block; border-bottom:1px solid var(--line); margin-bottom:1mm; padding-bottom:.5mm; }
+  .rules{ font-size:6pt; color:#9a8a77; margin-top:2.5mm; line-height:1.55; }
+  .exp{ font-size:6.8pt; margin-top:2mm; }
+  .exp .box{ display:inline-block; border:1px solid var(--line); background:#fff; border-radius:1mm; padding:.5mm 6mm; margin-left:1mm; }
+  @media print{ body{ background:#fff; padding:0; } .memo,h1,.label{ display:none; } .cards{ gap:10mm; padding:10mm; } .card{ box-shadow:none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>サ菓子スタンプカード デザイン案(名刺サイズ 91×55mm)</h1>
+  <p class="memo">たたき台です。⚠️特典内容(サウナ500円引き/焼き菓子1点)・スタンプ条件・有効期限は社長と降矢シェフで決めてください。決まり次第、文言差し替え+QRコード(予約ページ・お店の地図)を入れて入稿用データに仕上げます。</p>
+  <div class="cards">
+    <div>
+      <div class="label">表面</div>
+      <div class="card">
+        <div class="band"></div>
+        <div class="t-kicker">GO TOTONOU, THEN SWEETS.</div>
+        <div class="t-main">サウナ × スイーツ<br>スタンプカード</div>
+        <div class="t-sub">富谷の「ととのい」と「ご褒美」をはしごしよう</div>
+        <div class="stamps">
+          <div class="stamp"><b>KOWA<br>SAUNA</b><span>サウナ利用で1つ</span></div>
+          <div class="plus">＋</div>
+          <div class="stamp"><b>pâtisserie<br>Ré-créat</b><span>お買い物で1つ</span></div>
+          <div class="prize"><b>2つ揃ったら特典!</b><br>次回サウナ500円引き<br>or 焼き菓子1点</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="label">裏面</div>
+      <div class="card back">
+        <div class="band"></div>
+        <div class="shop" style="margin-top:2.5mm">
+          <div class="col">
+            <b>KOWA SAUNA(コーワ サウナ)</b>
+            完全貸切プライベートサウナ<br>
+            富谷市/1日2組限定(13-16時・18-21時)<br>
+            TEL 022-358-6092<br>
+            予約は「KOWA SAUNA」で検索(入稿時はQR)
+          </div>
+          <div class="col">
+            <b>pâtisserie Ré-créat(レクリア)</b>
+            パリ仕込みのケーキと焼き菓子<br>
+            富谷市日吉台2-35-4<br>
+            TEL 022-358-0258<br>
+            営業 10:30-18:30
+          </div>
+        </div>
+        <div class="rules">※スタンプはお会計時にスタッフが押印します。※特典はスタンプ2つが揃ったカードとの引き換えで、どちらか一方のお店でご利用いただけます。※他の割引との併用不可。</div>
+        <div class="exp">有効期限:<span class="box">　　年　　月　　日</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
