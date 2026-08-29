@@ -32,6 +32,11 @@
   .back .shop{ display:flex; justify-content:space-between; gap:4mm; margin-top:3mm; }
   .back .col{ flex:1; font-size:6.8pt; line-height:1.6; }
   .back .col b{ font-size:7.5pt; display:block; border-bottom:1px solid var(--line); margin-bottom:1mm; padding-bottom:.5mm; }
+  .colwrap{ display:flex; gap:2mm; align-items:flex-start; }
+  .coltext{ flex:1; }
+  .qrbox{ text-align:center; }
+  .qrbox img{ width:11mm; height:11mm; display:block; }
+  .qrbox span{ font-size:4.5pt; color:#9a8a77; letter-spacing:.05em; }
   .rules{ font-size:6pt; color:#9a8a77; margin-top:2.5mm; line-height:1.55; }
   .exp{ font-size:6.8pt; margin-top:2mm; }
   .exp .box{ display:inline-block; border:1px solid var(--line); background:#fff; border-radius:1mm; padding:.5mm 6mm; margin-left:1mm; }
@@ -41,7 +46,7 @@
 <body>
 <div class="wrap">
   <h1>サ菓子スタンプカード デザイン案(名刺サイズ 91×55mm)</h1>
-  <p class="memo">たたき台です。⚠️特典内容(サウナ500円引き/焼き菓子1点)・スタンプ条件・有効期限は社長と降矢シェフで決めてください。決まり次第、文言差し替え+QRコード(予約ページ・お店の地図)を入れて入稿用データに仕上げます。</p>
+  <p class="memo">たたき台です。⚠️特典内容(サウナ500円引き/焼き菓子1点)・スタンプ条件・有効期限は社長と降矢シェフで決めてください。両店のInstagram QRは実データ埋め込み済み(コーワ=@kouwa.reform.sauna/レクリア=@patisserie_recreat)。決まり次第、文言を差し替えて入稿用データに仕上げます。</p>
   <div class="cards">
     <div>
       <div class="label">表面</div>
@@ -65,17 +70,19 @@
         <div class="shop" style="margin-top:2.5mm">
           <div class="col">
             <b>KOWA SAUNA(コーワ サウナ)</b>
-            完全貸切プライベートサウナ<br>
-            黒川郡大和町杜の丘1-10-1/1日2組限定<br>
+            <div class="colwrap"><div class="coltext">完全貸切プライベートサウナ<br>
+            黒川郡大和町杜の丘1-10-1<br>
             TEL 022-358-6092<br>
-            予約は「KOWA SAUNA」で検索(入稿時はQR)
+            1日2組限定・予約制</div>
+            <div class="qrbox"><img src="data:image/png;base64,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" alt="KOWA SAUNA Instagram"><span>Instagram</span></div></div>
           </div>
           <div class="col">
             <b>pâtisserie Ré-créat(レクリア)</b>
-            パリ仕込みのケーキと焼き菓子<br>
+            <div class="colwrap"><div class="coltext">パリ仕込みのケーキと焼き菓子<br>
             富谷市日吉台2-35-4<br>
             TEL 022-358-0258<br>
-            営業 10:30-18:30
+            営業 10:30-18:30(水曜定休)</div>
+            <div class="qrbox"><img src="data:image/png;base64,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" alt="Ré-créat Instagram"><span>Instagram</span></div></div>
           </div>
         </div>
         <div class="rules">※スタンプはお会計時にスタッフが押印します。※特典はスタンプ2つが揃ったカードとの引き換えで、どちらか一方のお店でご利用いただけます。※他の割引との併用不可。</div>
