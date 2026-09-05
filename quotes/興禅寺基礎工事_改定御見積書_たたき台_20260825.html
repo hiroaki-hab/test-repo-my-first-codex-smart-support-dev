@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>御見積書(改定) 興禅寺様基礎工事</title>
+<style>
+  @page { size: A4; margin: 14mm 14mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Noto Serif CJK JP", "Yu Mincho", "Hiragino Mincho ProN", serif;
+    color: #1a1a1a; font-size: 10.5pt; line-height: 1.5;
+  }
+  .sheet { width: 100%; }
+  h1 {
+    text-align: center; font-size: 24pt; letter-spacing: 1.2em;
+    padding-left: 1.2em; margin: 4mm 0 8mm;
+  }
+  .meta { text-align: right; font-size: 9.5pt; margin-bottom: 2mm; }
+  .head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6mm; }
+  .to { width: 55%; }
+  .to .name { font-size: 14pt; font-weight: bold; border-bottom: 1.5px solid #000; padding-bottom: 1mm; }
+  .to .greet { margin-top: 5mm; font-size: 10pt; }
+  .from { width: 40%; position: relative; font-size: 9.5pt; }
+  .from .co { font-size: 12pt; font-weight: bold; margin-bottom: 1mm; }
+  .seal { position: absolute; top: -2mm; right: 2mm; width: 21mm; height: 21mm; opacity: .85; }
+  .info { width: 100%; border-collapse: collapse; margin-bottom: 5mm; }
+  .info th, .info td { border: 1px solid #333; padding: 1.6mm 2.5mm; text-align: left; }
+  .info th { width: 24mm; background: #f2f2f2; font-weight: bold; }
+  .amount {
+    border-top: 2.5px solid #000; border-bottom: 2.5px solid #000;
+    text-align: center; font-size: 16pt; font-weight: bold;
+    padding: 3mm 0; margin: 5mm 0 6mm; letter-spacing: .1em;
+  }
+  table.detail { width: 100%; border-collapse: collapse; }
+  .detail th, .detail td { border: 1px solid #333; padding: 1.8mm 2mm; }
+  .detail th { background: #e8eef7; font-weight: bold; text-align: center; font-size: 9.5pt; }
+  .detail td.no { width: 8mm; text-align: center; }
+  .detail td.qty { width: 12mm; text-align: center; }
+  .detail td.unit { width: 12mm; text-align: center; }
+  .detail td.price { width: 22mm; text-align: right; }
+  .detail td.amt { width: 26mm; text-align: right; }
+  .detail tr.total td { font-weight: bold; background: #f7f7f7; }
+  .ph { color: #b00; font-weight: bold; }
+  .notes { margin-top: 6mm; font-size: 9pt; }
+  .notes .t { font-weight: bold; margin-bottom: 1mm; }
+  .notes ol { margin-left: 5mm; }
+  .notes li { margin-bottom: .8mm; }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <h1>御見積書</h1>
+  <div class="meta">
+    見積No.　K-20260825-01（改定）<br>
+    発行日　2026年8月　日
+  </div>
+  <div class="head">
+    <div class="to">
+      <div class="name">佐信木材株式会社　御中</div>
+      <div class="greet">下記の通りお見積り申し上げます。<br>（2026年6月期限の前回見積の改定版です）</div>
+    </div>
+    <div class="from">
+      <svg class="seal" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="4" width="92" height="92" fill="none" stroke="#c8281e" stroke-width="6"/>
+        <g fill="#c8281e" font-size="25" font-weight="bold" text-anchor="middle"
+           font-family="'Noto Serif CJK JP','Yu Mincho',serif">
+          <text x="78" y="34">有</text><text x="78" y="62">限</text><text x="78" y="90">会</text>
+          <text x="50" y="34">社</text><text x="50" y="62">光</text><text x="50" y="90">和</text>
+          <text x="22" y="34">工</text><text x="22" y="62">業</text><text x="22" y="90">印</text>
+        </g>
+      </svg>
+      <div class="co">有限会社 光和工業</div>
+      代表取締役　佐藤 広顕<br>
+      〒981-3628 宮城県黒川郡大和町杜の丘1-10-1<br>
+      TEL 022-358-6092　FAX 022-358-8244
+    </div>
+  </div>
+
+  <table class="info">
+    <tr><th>件　名</th><td>興禅寺様 本堂新築工事　基礎工事</td></tr>
+    <tr><th>工事場所</th><td class="ph">【要入力：興禅寺 所在地】</td></tr>
+    <tr><th>工　期</th><td>建築確認取得後（10月以降着工見込み）〜　※日程は別途調整</td></tr>
+    <tr><th>有効期限</th><td>2026年9月30日（9月中のご契約で本見積金額を維持いたします）</td></tr>
+    <tr><th>支払条件</th><td>従前のお取り決めによる</td></tr>
+  </table>
+
+  <div class="amount">御見積金額　　￥<span class="ph">【要入力】</span> －（税込）</div>
+
+  <table class="detail">
+    <tr><th>No.</th><th>工事項目・仕様</th><th>数量</th><th>単位</th><th>単価</th><th>金額</th></tr>
+    <tr><td class="no">1</td><td>基礎工事一式（根切・砕石・捨てコン・配筋・型枠・生コン打設・埋戻し）※生コン車指定なし</td><td class="qty">1</td><td class="unit">式</td><td class="price"></td><td class="amt ph">【要入力】</td></tr>
+    <tr><td class="no">2</td><td>現場管理費（現場管理・工事写真撮影・配筋確認立会）</td><td class="qty">1</td><td class="unit">式</td><td class="price"></td><td class="amt ph">【要入力】</td></tr>
+    <tr><td class="no">3</td><td>諸経費</td><td class="qty">1</td><td class="unit">式</td><td class="price"></td><td class="amt ph">【要入力】</td></tr>
+    <tr><td colspan="5" style="text-align:right">小　計</td><td class="amt ph">【自動計算】</td></tr>
+    <tr><td colspan="5" style="text-align:right">消費税（10%）</td><td class="amt ph">【自動計算】</td></tr>
+    <tr class="total"><td colspan="5" style="text-align:right">合　計</td><td class="amt ph">【自動計算】</td></tr>
+  </table>
+
+  <div class="notes">
+    <div class="t">【備考】</div>
+    <ol>
+      <li>本見積は、生コン単価および諸経費の高騰に伴う前回見積（有効期限2026年6月末）の改定版です。</li>
+      <li>2026年9月中にご契約いただいた場合、本見積金額を維持いたします（10月以降は再改定の可能性があります）。</li>
+      <li>生コン車の指定は行わない前提です（指定される場合は別途約28万円が加算されます）。</li>
+      <li>着工は建築確認取得後となります（現時点で10月以降を見込み）。</li>
+      <li>基礎工事の現場管理・工事写真の撮影は弊社にて行います。配筋確認等は設計・渡辺様と実施いたします。</li>
+    </ol>
+  </div>
+</div>
+</body>
+</html>
