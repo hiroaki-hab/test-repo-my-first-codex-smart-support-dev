@@ -67,6 +67,12 @@
 - Gmail連携は hiroakikouwa5@gmail.com のアカウント(hiroaki@kouwa-kg.co.jp宛のメールも同じ受信箱に届く)
 - PR監視: このリポジトリのPRをセッションが1時間ごとにチェック
 
+## 迷惑メール扱いの送信元(2026-09-29 社長指示「いつも消しているメールは迷惑メールに」)
+
+- 対象(見つけ次第 mark_thread_spam): newsletter@id.kahoku.co.jp / kahoku-oshirase@id.kahoku.co.jp / mailmagazine_tkmail@toyokeizai.net / magazine@dankennedy.jp / news@dankennedy.jp / b2b-support@mail.persol.co.jp / marketing@tsr-net.co.jp / marketing_news@ipros.jp / info@tokubetu.or.jp / *@notice.alibaba.com / *aliexpress.com / rakuten24_8@shop.rakuten.co.jp / adidas_3@shop.rakuten.co.jp / information@emagazine.rakuten.co.jp / store-news@amazon.co.jp / for-you@creema.jp / pgmweb-news@pacificgolf.co.jp / wester@info.jr-odekake.net / sony@email03.account.sony.com / mail@tripla.jp / support@ieichiba.com / news@cns-sys.com / info@neith-inc.com
+- **対象外(迷惑にしない)**: 山一地所・積水・ANDPAD・同友会(e-doyu)・SBペイメント・マネーフォワード・クラウドサイン・銀行/カード明細(77銀行・JCB・楽天カード)・会社HPフォーム通知(wordpress@kouwa-kg.co.jp、問い合わせ混在の可能性)・光和AI自己通知・個人(Snow Man FC・U-NEXT・ランネット等)
+- 9/29に上記送信元のゴミ箱メール64通を迷惑メール登録済み。**Claudeの迷惑メール登録は毎回承認が必要**(自分で許可設定は変更不可)→社長が承認なしモードにするか許可ルールを追加すれば、朝のメールチェックで自動処理可能。
+
 ## 接続済みサービス
 
 - Gmail(下書き作成まで・送信は人間)、Googleカレンダー、Google Drive、Box、GitHub、Canva
