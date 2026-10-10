@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>示談金受取書</title>
+<style>
+  @page { size: A4; margin: 22mm 18mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'WenQuanYi Zen Hei'; color: #111; font-size: 11pt; line-height: 1.9; }
+  h1 { text-align: center; font-size: 20pt; letter-spacing: .5em; padding-left: .5em; margin: 2mm 0 10mm; }
+  .to { margin-bottom: 8mm; }
+  .amount { border: 1.5px solid #333; text-align: center; font-size: 15pt; font-weight: bold; padding: 3mm 0; margin: 5mm 0 8mm; letter-spacing: .1em; }
+  .body { margin-bottom: 8mm; }
+  .box { border: 1.2px solid #333; padding: 3mm 4mm; margin-bottom: 10mm; }
+  .box .t { font-weight: bold; margin-bottom: 1mm; }
+  .row { display: flex; margin-bottom: 1.2mm; }
+  .row .lbl { width: 26mm; }
+  .fill { flex: 1; border-bottom: 1px solid #555; min-height: 6mm; }
+  .fill2 { display: inline-block; border-bottom: 1px solid #555; width: 14mm; text-align: center; }
+  .date { margin-bottom: 10mm; }
+  .sig .who { font-weight: bold; margin-bottom: 2mm; }
+  .sigrow { display: flex; margin-bottom: 3mm; align-items: flex-end; }
+  .sigrow .lbl { width: 22mm; }
+  .sigrow .fill { min-height: 7mm; }
+  .sigrow .in { width: 12mm; text-align: center; color: #555; }
+</style>
+</head>
+<body>
+  <h1>示談金受取書</h1>
+
+  <div class="to">有限会社 光和工業<br>代表取締役　佐藤 広顕　殿</div>
+
+  <div class="amount">金　91,598　円也</div>
+
+  <div class="body">
+    私は、下記事故に関する示談金(治療費、文書料、休業損害、慰謝料その他本件事故に起因する一切の損害を含む)として、上記金額を本日確かに受領いたしました。<br>
+    本件事故に関しては、上記金額のほか、貴社に対し名目のいかんを問わず何らの請求をしないことを確認いたします。
+  </div>
+
+  <div class="box">
+    <div class="t">【事故の表示】</div>
+    <div class="row"><div class="lbl">発生日</div><div>令和8年6月29日</div></div>
+    <div class="row"><div class="lbl">発生場所</div><div class="fill"></div></div>
+  </div>
+
+  <div class="date">令和8年　<span class="fill2"></span>　月　<span class="fill2"></span>　日</div>
+
+  <div class="sig">
+    <div class="who">受領者</div>
+    <div class="sigrow"><div class="lbl">住　所</div><div class="fill"></div></div>
+    <div class="sigrow"><div class="lbl">氏　名</div><div class="fill"></div><div class="in">㊞</div></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>示談書</title>
+<style>
+  @page { size: A4; margin: 20mm 18mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'WenQuanYi Zen Hei'; color: #111; font-size: 10.5pt; line-height: 1.7; }
+  h1 { text-align: center; font-size: 20pt; letter-spacing: 1em; padding-left: 1em; margin: 2mm 0 8mm; }
+  .box { border: 1.2px solid #333; padding: 3mm 4mm; margin-bottom: 6mm; }
+  .box .t { font-weight: bold; margin-bottom: 1mm; }
+  .row { display: flex; margin-bottom: 1.2mm; }
+  .row .lbl { width: 26mm; }
+  .fill { flex: 1; border-bottom: 1px solid #555; min-height: 6mm; }
+  .parties { margin-bottom: 5mm; }
+  .clause { margin-bottom: 4mm; }
+  .clause .no { font-weight: bold; }
+  .tail { margin: 6mm 0 8mm; }
+  .date { margin-bottom: 8mm; }
+  .date .fill2 { display: inline-block; border-bottom: 1px solid #555; width: 14mm; text-align: center; }
+  .sig { margin-bottom: 8mm; }
+  .sig .who { font-weight: bold; margin-bottom: 2mm; }
+  .sigrow { display: flex; margin-bottom: 2.5mm; align-items: flex-end; }
+  .sigrow .lbl { width: 22mm; }
+  .sigrow .fill { min-height: 7mm; }
+  .sigrow .in { width: 12mm; text-align: center; color: #555; }
+  .fixed { line-height: 1.9; }
+</style>
+</head>
+<body>
+  <h1>示談書</h1>
+
+  <div class="box">
+    <div class="t">【事故の表示】(以下「本件事故」という)</div>
+    <div class="row"><div class="lbl">発生日</div><div>令和8年6月29日</div></div>
+    <div class="row"><div class="lbl">発生場所</div><div class="fill"></div></div>
+    <div class="row"><div class="lbl">事故の態様</div><div class="fill"></div></div>
+    <div class="row"><div class="lbl"></div><div class="fill"></div></div>
+  </div>
+
+  <div class="parties">
+    被害者(以下「甲」という)と、加害者 有限会社光和工業(以下「乙」という)とは、本件事故による損害賠償について、次のとおり示談する。
+  </div>
+
+  <div class="clause"><span class="no">第1条(示談金)</span>　乙は甲に対し、本件事故による損害賠償金として、金91,598円(治療費、文書料、休業損害、慰謝料その他本件事故に起因する一切の損害を含む)を支払う。</div>
+
+  <div class="clause"><span class="no">第2条(支払方法)</span>　乙は前条の示談金を、令和8年<span class="date"><span class="fill2"></span></span>月<span class="date"><span class="fill2"></span></span>日限り、甲の指定する金融機関口座への振込(振込手数料は乙の負担とする)または現金の交付により支払う。</div>
+
+  <div class="clause"><span class="no">第3条(清算条項)</span>　甲及び乙は、本件事故に関し、本示談書に定めるもののほか、相互に何らの債権債務が存在しないことを確認し、甲は今後、本件事故に関して名目のいかんを問わず、乙に対し一切の請求をしない。</div>
+
+  <div class="clause"><span class="no">第4条(後遺障害)</span>　本件事故に起因して、本示談成立時に予見できなかった後遺障害が将来発生した場合の補償については、甲乙誠意をもって別途協議する。</div>
+
+  <div class="tail">本示談の成立を証するため、本書2通を作成し、甲乙署名(記名)押印のうえ、各自1通を保有する。</div>
+
+  <div class="date">令和8年　<span class="fill2"></span>　月　<span class="fill2"></span>　日</div>
+
+  <div class="sig">
+    <div class="who">甲(被害者)</div>
+    <div class="sigrow"><div class="lbl">住　所</div><div class="fill"></div></div>
+    <div class="sigrow"><div class="lbl">氏　名</div><div class="fill"></div><div class="in">㊞</div></div>
+  </div>
+
+  <div class="sig">
+    <div class="who">乙(加害者)</div>
+    <div class="fixed">
+      住　所　宮城県黒川郡大和町杜の丘1-10-1<br>
+      名　称　有限会社 光和工業<br>
+      代表者　代表取締役　佐藤 広顕　　　　　　　　　　　　　　　　㊞
+    </div>
+  </div>
+</body>
+</html>
