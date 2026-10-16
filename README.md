@@ -1,1 +1,7 @@
 # test-repo-my-first-codex-smart-support-dev
+
+## ドキュメント
+
+- [積水 安全協議会 定例会議 議事録](docs/safety/safety-meeting-minutes.md)
+- [公衆災害 事故報告書（駐車場での車両事故）](docs/safety/parking-accident-report.md)
+- [報連相用まとめ（社内共有文）](docs/safety/horenso-summary.md)
